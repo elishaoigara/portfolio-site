@@ -4,7 +4,8 @@ function Projects() {
   const projects = [
     {
       title: 'FinLog – Expense Tracker',
-      description: 'A modern personal finance app to track income, expenses, and budgets with visual charts.',
+      description:
+        'A modern personal finance app to track income, expenses, and budgets with visual charts.',
       tech: ['React', 'Bootstrap', 'Chart.js', 'Firebase'],
       github: 'https://github.com/elishaoigara/finlog',
       demo: 'https://finlog-three.vercel.app/',
@@ -15,9 +16,9 @@ function Projects() {
     <section id="projects" className="py-5 text-light" style={{ background: 'transparent' }}>
       <div className="container">
         <h2 className="mb-5 text-center border-bottom border-secondary pb-3">Projects</h2>
-        <div className="row">
+        <div className="row justify-content-center">
           {projects.map((project, index) => (
-            <div className="col-md-6 mb-4" key={index}>
+            <div className="col-md-8 mb-4" key={index}>
               <div
                 className="card h-100 text-light border-secondary shadow"
                 style={{
