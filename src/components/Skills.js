@@ -2,12 +2,13 @@
 import React from 'react';
 import {
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaBootstrap,
-  FaGitAlt, FaGithub, FaPython
+  FaGitAlt, FaGithub, FaPython, FaPenNib, FaChalkboardTeacher
 } from 'react-icons/fa';
 import {
   SiTailwindcss, SiFirebase, SiRedux, SiTypescript, SiSass, SiEslint
 } from 'react-icons/si';
 import { MdDevices } from 'react-icons/md';
+import { LuPresentation } from 'react-icons/lu'; // ✅ Valid icon for Presentations
 
 function Skills() {
   const categories = {
@@ -32,7 +33,12 @@ function Skills() {
       { name: 'GitHub', icon: <FaGithub /> },
       { name: 'Firebase', icon: <SiFirebase /> },
       { name: 'ESLint', icon: <SiEslint /> },
-    ]
+    ],
+    Services: [
+      { name: 'Writing', icon: <FaPenNib /> },
+      { name: 'Research Assistance', icon: <FaChalkboardTeacher /> },
+      { name: 'Presentations', icon: <LuPresentation /> },
+    ],
   };
 
   return (
@@ -40,7 +46,7 @@ function Skills() {
       <div className="container">
         <h2 className="mb-4 text-center border-bottom border-secondary pb-3">Skills</h2>
 
-        {Object.entries(categories).map(([category, skills], idx) => (
+        {Object.entries(categories).map(([category, skills]) => (
           <div key={category} className="mb-5">
             <h4 className="text-center mb-4 text-info">{category}</h4>
             <div className="row justify-content-center">

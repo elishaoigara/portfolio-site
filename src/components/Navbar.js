@@ -1,15 +1,16 @@
 import React from 'react';
 import Scrollspy from 'react-scrollspy';
 
-function Navbar() {
-  const navLinks = [
-    { href: '#hero', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#contact', label: 'Contact' },
-  ];
+const navLinks = [
+  { href: '#hero', label: 'Home' },
+  { href: '#about', label: 'About' },
+  { href: '#services', label: 'Services' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#contact', label: 'Contact' },
+];
 
+function Navbar() {
   return (
     <>
       <nav
@@ -26,7 +27,7 @@ function Navbar() {
             Elisha
           </a>
 
-          {/* Mobile toggle button */}
+          {/* Toggler for mobile offcanvas */}
           <button
             className="navbar-toggler"
             type="button"
@@ -37,17 +38,17 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Desktop Navigation */}
-          <div className="d-none d-lg-block ms-auto">
+          {/* Desktop Nav */}
+          <div className="collapse navbar-collapse d-none d-lg-block">
             <Scrollspy
               items={navLinks.map(link => link.href.replace('#', ''))}
               currentClassName="active"
               componentTag="ul"
-              className="navbar-nav text-center"
+              className="navbar-nav ms-auto"
               offset={-100}
             >
-              {navLinks.map((link, idx) => (
-                <li key={idx} className="nav-item">
+              {navLinks.map((link, index) => (
+                <li className="nav-item" key={index}>
                   <a
                     href={link.href}
                     className="nav-link text-light px-3"
