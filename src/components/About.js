@@ -1,9 +1,8 @@
-// src/components/About.js
 import React from 'react';
-import { FaMapMarkerAlt, FaCode, FaLaptopCode } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaCode, FaLaptopCode, FaPenFancy, FaSlideshare } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import profilePic from '../assets/elisha.jpeg';
-import './About.css'; // Optional for custom styles
+import './About.css';
 
 function About() {
   return (
@@ -33,11 +32,13 @@ function About() {
           {/* Text Content */}
           <div className="col-md-7">
             <p className="lead">
-              Hi! I'm <strong>Elisha Oigara</strong>, a passionate Frontend Developer based in Kenya.
-              I specialize in building clean, responsive interfaces using <strong>React.js</strong> and <strong>Bootstrap</strong>.
+              Hi! I'm <strong>Elisha Oigara</strong>, a passionate Frontend Developer and Creative Professional based in Kenya.
+              I specialize in building clean, responsive user interfaces using <strong>React.js</strong>, <strong>Bootstrap</strong>, and <strong>Tailwind</strong>.
             </p>
             <p>
-              I love solving problems with code, designing intuitive UIs, and collaborating with global teams to build impactful projects.
+              Beyond coding, I also offer services in <strong>research & writing</strong>, <strong>presentation design</strong>,
+              and <strong>business profile creation</strong>. Whether you're building a brand or pitching a big idea, I can help
+              you communicate it effectively.
             </p>
             <ul className="list-unstyled">
               <li className="mb-2">
@@ -46,13 +47,34 @@ function About() {
               </li>
               <li className="mb-2">
                 <FaLaptopCode className="me-2 text-info" />
-                <strong>Focus:</strong> Frontend Engineering · UI/UX Design · Web Performance
+                <strong>Focus:</strong> Frontend Development · UI/UX Design · Web Performance
               </li>
               <li className="mb-2">
                 <FaCode className="me-2 text-success" />
                 <strong>Stack:</strong> React · Bootstrap · Tailwind · Firebase
               </li>
+              <li className="mb-2">
+                <FaPenFancy className="me-2 text-primary" />
+                <strong>Creative:</strong> Academic Writing · Business Profiles · Content Writing
+              </li>
+              <li className="mb-2">
+                <FaSlideshare className="me-2 text-danger" />
+                <strong>Design:</strong> Presentations · Pitch Decks · Canva Designs
+              </li>
             </ul>
+
+            {/* Hire Me Button */}
+            <motion.div
+              className="text-center mt-4"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <a href="#contact" className="btn btn-outline-light px-4 py-2">
+                🚀 Hire Me
+              </a>
+            </motion.div>
           </div>
         </div>
       </motion.div>
