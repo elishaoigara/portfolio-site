@@ -1,0 +1,21 @@
+.hero-section {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: transparent; /* 🔥 Remove dark background */
+  overflow: hidden;
+}
+
+/* Remove this if you had it */
+.gradient-overlay {
+  display: none;
+}
+
+.stroked-text {
+  -webkit-text-stroke: 1px #fff;
+  color: transparent;
+  background: linear-gradient(45deg, #ffffff, #bbbbbb);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
