@@ -25,7 +25,8 @@ function Navbar() {
           <a className="navbar-brand fw-bold text-light" href="#hero">
             Elisha
           </a>
-          {/* Toggler for mobile */}
+
+          {/* Mobile toggle button */}
           <button
             className="navbar-toggler"
             type="button"
@@ -36,13 +37,13 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Desktop nav */}
-          <div className="collapse navbar-collapse d-none d-lg-block">
+          {/* Desktop Navigation */}
+          <div className="d-none d-lg-block ms-auto">
             <Scrollspy
               items={navLinks.map(link => link.href.replace('#', ''))}
               currentClassName="active"
               componentTag="ul"
-              className="navbar-nav ms-auto text-center"
+              className="navbar-nav text-center"
               offset={-100}
             >
               {navLinks.map((link, idx) => (
