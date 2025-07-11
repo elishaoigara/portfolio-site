@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+UpcomingPayments Component – FinLog
+This component is part of the FinLog web application, designed to track and manage upcoming payment reminders in a clean, modern, and responsive way.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+✨ Features
+Add new upcoming payments with:
 
-## Available Scripts
+Payment title
 
-In the project directory, you can run:
+Amount in Kenyan Shillings (Ksh)
 
-### `npm start`
+Due date
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Optional notes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Display upcoming payments in a responsive, animated card layout.
 
-### `npm test`
+Smooth entry animations using Framer Motion.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Built with React.js, Bootstrap 5, and Framer Motion.
 
-### `npm run build`
+📁 File Location
+bash
+Copy
+Edit
+/src/components/UpcomingPayments.js
+🛠️ Technologies Used
+React.js
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Bootstrap 5
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Framer Motion
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+✅ How to Use
+Ensure your project has the following dependencies installed:
 
-### `npm run eject`
+bash
+Copy
+Edit
+npm install framer-motion bootstrap
+Import and use the component in your parent dashboard or page:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+jsx
+Copy
+Edit
+import UpcomingPayments from './components/UpcomingPayments';
+Provide props:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+upcomingPayments (array)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+onAdd (function to handle adding a new payment)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Example Usage:
 
-## Learn More
+jsx
+Copy
+Edit
+const [upcomingPayments, setUpcomingPayments] = useState([]);
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+const handleAddPayment = (payment) => {
+  setUpcomingPayments([...upcomingPayments, payment]);
+};
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<UpcomingPayments
+  upcomingPayments={upcomingPayments}
+  onAdd={handleAddPayment}
+/>
+🎨 Styling Notes
+Payment cards are styled with Bootstrap 5 and Framer Motion animations.
 
-### Code Splitting
+Rounded corners, subtle shadows, and responsive grid layout included.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+📸 Screenshots
+Desktop View	Mobile View
 
-### Analyzing the Bundle Size
+⚙️ Customization Suggestions
+Integrate with a backend or local storage for persistent payment reminders.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Add delete or edit functionality for each payment card.
 
-### Making a Progressive Web App
+Style cards with color indicators based on due date urgency.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🧑‍💻 Author
+Developed by Elisha Oigara
