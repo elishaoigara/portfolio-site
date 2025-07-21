@@ -10,6 +10,14 @@ function Projects() {
       github: 'https://github.com/elishaoigara/finlog',
       demo: 'https://finlog-three.vercel.app/',
     },
+    {
+      title: 'SkyCast – Weather App',
+      description:
+        'A sleek weather application that fetches real-time weather data based on city input and geolocation, with unit toggle and error handling.',
+      tech: ['React', 'Bootstrap', 'OpenWeatherMap API'],
+      github: 'https://github.com/elishaoigara/SkyCast',
+      demo: 'https://sky-cast-pied-one.vercel.app/',
+    },
   ];
 
   return (
