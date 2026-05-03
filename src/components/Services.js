@@ -60,7 +60,7 @@ function Services() {
     <section id="services" style={{ padding: '100px 0', background: 'linear-gradient(180deg, transparent 0%, rgba(13,17,23,0.5) 50%, transparent 100%)' }}>
       <div className="container">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-          <span className="section-label">// Services</span>
+          <span className="section-label">{'// Services'}</span>
           <h2 className="section-title">What I Can<br /><span style={{ background: 'var(--gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Build for You</span></h2>
           <div className="section-divider" />
         </motion.div>

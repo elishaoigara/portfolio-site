@@ -38,7 +38,7 @@ function Education() {
     <section id="education" style={{ padding: '100px 0' }}>
       <div className="container">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-          <span className="section-label">// Education</span>
+          <span className="section-label">{'// Education'}</span>
           <h2 className="section-title">Academic<br /><span style={{ background: 'var(--gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Background</span></h2>
           <div className="section-divider" />
         </motion.div>

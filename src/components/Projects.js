@@ -78,7 +78,7 @@ function Projects() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <span className="section-label">// Projects</span>
+          <span className="section-label">{'// Projects'}</span>
           <h2 className="section-title">
             Things I've<br />
             <span style={{ background: 'var(--gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
@@ -145,7 +145,7 @@ function Projects() {
                 }} />
 
                 {project.featured ? (
-                  /* ── FEATURED ORA CARD ── */
+                  
                   <>
                     {/* Header row */}
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center', marginBottom: '20px' }}>
@@ -220,7 +220,7 @@ function Projects() {
                     </p>
                   </>
                 ) : (
-                  /* ── REGULAR CARD ── */
+                  
                   <>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', alignItems: 'flex-start' }}>
                       <div style={{

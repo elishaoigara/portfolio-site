@@ -67,7 +67,7 @@ function Contact() {
     <section id="contact" style={{ padding: '100px 0' }}>
       <div className="container">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-          <span className="section-label">// Contact</span>
+          <span className="section-label">{'// Contact'}</span>
           <h2 className="section-title">Let's Work<br /><span style={{ background: 'var(--gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Together</span></h2>
           <div className="section-divider" />
           <p style={{ color: 'var(--text-muted)', maxWidth: '500px', marginBottom: '56px' }}>
