@@ -96,7 +96,7 @@ function Skills() {
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}>
-          <span className="section-label">// Tech Stack</span>
+          <span className="section-label">{'// Tech Stack'}</span>
           <h2 className="section-title">
             Skills &<br />
             <span
