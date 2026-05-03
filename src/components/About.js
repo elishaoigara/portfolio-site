@@ -6,7 +6,7 @@ function About() {
   const highlights = [
     { icon: '🌍', label: 'Location', value: 'Nairobi, Kenya' },
     { icon: '⚡', label: 'Focus', value: 'Full-Stack · AI-Augmented Dev' },
-    { icon: '🎓', label: 'Education', value: 'ALX SE Graduate · BIT · CS (UoPeople)' },
+    { icon: '🎓', label: 'Education', value: 'ALX SE Graduate · MKU BIT · CS (UoPeople)' },
     { icon: '🤖', label: 'Superpower', value: 'AI tools in every workflow, daily' },
   ];
 
@@ -62,7 +62,7 @@ function About() {
                 What sets me apart? I integrate <strong style={{ color: 'var(--accent)' }}>AI tools into every stage of my development workflow</strong> — using Claude Code, Cursor, GitHub Copilot, and other cutting-edge tools daily to accelerate delivery, reduce bugs, and write production-grade code at speed. AI isn't a trend for me; it's my development stack.
               </p>
               <p style={{ color: 'var(--text-muted)', fontSize: '16px', lineHeight: 1.8, marginBottom: '32px' }}>
-                I'm currently advancing my formal education in <strong style={{ color: 'var(--text)' }}>Business Information Technology</strong> and <strong style={{ color: 'var(--text)' }}>Computer Science at University of the People</strong>, combining academic depth with hands-on project experience.
+                I'm currently advancing my formal education in <strong style={{ color: 'var(--text)' }}>Business Information Technology at Mount Kenya University</strong> and <strong style={{ color: 'var(--text)' }}>Computer Science at University of the People</strong>, combining academic depth with hands-on project experience.
               </p>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '32px' }}>

@@ -13,12 +13,12 @@ function Education() {
       icon: '🎓',
     },
     {
-      institution: 'Zetech University',
+      institution: 'Mount Kenya University',
       degree: 'Bachelor of Science — Business Information Technology',
       period: '2024 – Expected Aug 2027',
       status: 'In Progress',
       statusColor: 'var(--accent)',
-      description: 'Integrating business strategy with software systems — covering project management, enterprise systems, and information systems.',
+      description: 'Integrating business strategy with software systems — covering project management, enterprise systems, business analysis, and information systems architecture.',
       icon: '🏛️',
     },
     {
