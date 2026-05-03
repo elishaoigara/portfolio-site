@@ -65,7 +65,7 @@ function Skills() {
           'linear-gradient(135deg, rgba(5,8,12,0.97), rgba(8,14,22,0.95))',
       }}
     >
-      {/* ── Ambient Orbs ── */}
+      {/* Ambient orb background effect */}
       <div
         style={{
           position: 'absolute',
@@ -76,13 +76,11 @@ function Skills() {
           background:
             'radial-gradient(circle, rgba(0,212,255,0.06), transparent 65%)',
           borderRadius: '50%',
-          transform: `translate(${mousePos.x * 0.2}px, ${
-            mousePos.y * 0.2
-          }px)`,
+          transform: `translate(${mousePos.x * 0.2}px, ${mousePos.y * 0.2}px)`,
         }}
       />
 
-      {/* Grid */}
+      {/* Grid background */}
       <div
         style={{
           position: 'absolute',
@@ -100,12 +98,10 @@ function Skills() {
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}>
           <span className="section-label">// Tech Stack</span>
           <h2 className="section-title">
-            Skills &
-            <br />
+            Skills &<br />
             <span
               style={{
-                background:
-                  'linear-gradient(135deg, #00d4ff 0%, #7b61ff 100%)',
+                background: 'linear-gradient(135deg, #00d4ff 0%, #7b61ff 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}
@@ -139,7 +135,7 @@ function Skills() {
           ))}
         </div>
 
-        {/* Cards */}
+        {/* Skill Cards */}
         <div className="row g-4">
           {active.items.map((skill, i) => (
             <div key={i} className="col-md-6 col-lg-4 col-xl-3">
@@ -157,7 +153,7 @@ function Skills() {
                   overflow: 'hidden',
                 }}
               >
-                {/* Glow */}
+                {/* Glow effect */}
                 <div
                   style={{
                     position: 'absolute',
@@ -179,7 +175,7 @@ function Skills() {
                   {skill.desc}
                 </p>
 
-                {/* Progress */}
+                {/* Progress bar */}
                 <div
                   style={{
                     height: '4px',
