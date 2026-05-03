@@ -1,145 +1,62 @@
-// src/components/ReachMeModal.js
 import React, { useState } from 'react';
-import { Modal, Button, Form, Toast, ToastContainer } from 'react-bootstrap';
-import { FaEnvelope } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
 
+function ReachMeModal() {
+  const [open, setOpen] = useState(false);
 
-const ReachMeModal = () => {
-  const [show, setShow] = useState(false);
-  const [toast, setToast] = useState({ show: false, message: '', variant: 'success' });
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const showToast = (message, variant = 'success') => {
-    setToast({ show: true, message, variant });
-    setTimeout(() => setToast({ show: false, message: '', variant: 'success' }), 4000);
-  };
+  const links = [
+    { label: 'Email Me', href: 'mailto:elishaoigara50@gmail.com', icon: '📧', color: 'var(--accent)' },
+    { label: 'LinkedIn', href: 'https://linkedin.com/in/elishaoigara', icon: '🔗', color: '#0077b5' },
+    { label: 'GitHub', href: 'https://github.com/elishaoigara', icon: '💻', color: 'var(--text)' },
+    { label: 'Twitter / X', href: 'https://twitter.com/lambertElisha3', icon: '🐦', color: '#1da1f2' },
+  ];
 
   return (
     <>
-      {/* Floating Contact Button */}
+      {/* FAB */}
       <button
-        onClick={handleShow}
-        className="btn btn-danger rounded-circle shadow"
-        title="Quick Contact"
-        aria-label="Reach Me"
+        onClick={() => setOpen(!open)}
         style={{
-          position: 'fixed',
-          bottom: '30px',
-          right: '30px',
-          zIndex: 9999,
-          width: '60px',
-          height: '60px',
-          fontSize: '20px',
+          position: 'fixed', bottom: '28px', right: '28px', zIndex: 9000,
+          width: '52px', height: '52px', borderRadius: '50%',
+          background: 'var(--gradient)', border: 'none', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: '22px', boxShadow: '0 4px 20px rgba(0,212,255,0.3)',
+          transition: 'transform 0.2s',
         }}
+        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
+        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
       >
-        <FaEnvelope />
+        {open ? '✕' : '💬'}
       </button>
 
-      {/* Modal with Animation */}
-      <AnimatePresence>
-        {show && (
-          <Modal
-            show={show}
-            onHide={handleClose}
-            centered
-            backdrop="static"
-            keyboard={false}
-            dialogClassName="modal-blur"
-            as={motion.div}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Modal.Header closeButton className="bg-dark text-light border-secondary">
-              <Modal.Title>Contact Me</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body className="bg-dark text-light">
-              <Form
-                action="https://formspree.io/f/xanjryon"
-                method="POST"
-                target="_blank"
-                onSubmit={() => {
-                  handleClose();
-                  showToast('✅ Message sent!');
-                }}
-              >
-                <Form.Group className="mb-3">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    name="name"
-                    type="text"
-                    required
-                    placeholder="Your name"
-                    className="bg-dark text-light border-light"
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="you@example.com"
-                    className="bg-dark text-light border-light"
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Subject</Form.Label>
-                  <Form.Select
-                    name="subject"
-                    required
-                    className="bg-dark text-light border-light"
-                  >
-                    <option value="">-- Select Subject --</option>
-                    <option value="Web Design">Web Design</option>
-                    <option value="Portfolio Review">Portfolio Review</option>
-                    <option value="Project Request">Project Request</option>
-                    <option value="Just Saying Hi">Just Saying Hi</option>
-                  </Form.Select>
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Message</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    name="message"
-                    rows={3}
-                    required
-                    placeholder="Write your message..."
-                    className="bg-dark text-light border-light"
-                  />
-                </Form.Group>
-
-                <Button variant="primary" type="submit" className="w-100">
-                  Send Message
-                </Button>
-              </Form>
-            </Modal.Body>
-          </Modal>
-        )}
-      </AnimatePresence>
-
-      {/* Toast Notification */}
-      <ToastContainer className="p-3 position-fixed bottom-0 end-0" style={{ zIndex: 9999 }}>
-        <Toast
-          show={toast.show}
-          bg={toast.variant}
-          onClose={() => setToast({ ...toast, show: false })}
-          autohide
-          delay={4000}
-        >
-          <Toast.Body className="text-white">{toast.message}</Toast.Body>
-        </Toast>
-      </ToastContainer>
+      {open && (
+        <div style={{
+          position: 'fixed', bottom: '92px', right: '28px', zIndex: 8999,
+          display: 'flex', flexDirection: 'column', gap: '8px',
+        }}>
+          {links.map((l, i) => (
+            <a key={i} href={l.href} target="_blank" rel="noreferrer"
+              style={{
+                display: 'flex', alignItems: 'center', gap: '10px',
+                padding: '10px 16px', borderRadius: '100px',
+                background: 'rgba(13,17,23,0.95)', backdropFilter: 'blur(20px)',
+                border: '1px solid var(--border)', textDecoration: 'none',
+                color: 'var(--text)', fontSize: '13px', fontWeight: 500,
+                fontFamily: 'var(--font-body)',
+                transition: 'all 0.2s', animation: `fadeUp 0.2s ease ${i * 0.05}s both`,
+                boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = l.color; e.currentTarget.style.color = l.color; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text)'; }}
+            >
+              <span>{l.icon}</span> {l.label}
+            </a>
+          ))}
+        </div>
+      )}
+      <style>{`@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`}</style>
     </>
   );
-};
+}
 
 export default ReachMeModal;

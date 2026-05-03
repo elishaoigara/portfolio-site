@@ -1,69 +1,56 @@
 import React from 'react';
-import { FaGithub, FaEnvelope } from 'react-icons/fa';
 
 function Footer() {
   return (
-    <footer
-      className="text-white text-center py-4 mt-5"
-      style={{
-        background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.2))',
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-      }}
-    >
+    <footer style={{
+      borderTop: '1px solid var(--border)',
+      padding: '40px 24px',
+      background: 'linear-gradient(0deg, rgba(0,0,0,0.3) 0%, transparent 100%)',
+    }}>
       <div className="container">
-        <p className="mb-2">Made with ❤️ by Elisha Oigara</p>
+        <div className="row align-items-center">
+          <div className="col-md-4 mb-3 mb-md-0">
+            <a href="#hero" style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 800,
+              fontSize: '20px',
+              background: 'var(--gradient)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textDecoration: 'none',
+            }}>
+              Elisha Oigara
+            </a>
+            <p style={{ color: 'var(--text-dim)', fontSize: '13px', marginTop: '6px', marginBottom: 0 }}>
+              Full-Stack Developer · AI Practitioner
+            </p>
+          </div>
 
-        <div className="d-flex justify-content-center gap-4 mb-2 flex-wrap">
-          {/* GitHub */}
-          <a
-            href="https://github.com/elishaoigara"
-            target="_blank"
-            rel="noreferrer"
-            className="text-white text-decoration-none d-flex align-items-center gap-1"
-            style={{ transition: 'transform 0.2s ease-in-out' }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-          >
-            <FaGithub /> GitHub
-          </a>
+          <div className="col-md-4 mb-3 mb-md-0 text-center">
+            <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+              {[
+                { href: 'https://github.com/elishaoigara', icon: 'fab fa-github' },
+                { href: 'https://linkedin.com/in/elishaoigara', icon: 'fab fa-linkedin' },
+                { href: 'https://twitter.com/lambertElisha3', icon: 'fab fa-twitter' },
+                { href: 'mailto:elishaoigara50@gmail.com', icon: 'fas fa-envelope' },
+              ].map((s, i) => (
+                <a key={i} href={s.href} target="_blank" rel="noreferrer"
+                  style={{ color: 'var(--text-dim)', fontSize: '18px', transition: 'color 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'var(--text-dim)'}
+                >
+                  <i className={s.icon} />
+                </a>
+              ))}
+            </div>
+          </div>
 
-          {/* Email */}
-          <a
-            href="mailto:elishaoigara50@gmail.com"
-            className="text-white text-decoration-none d-flex align-items-center gap-1"
-            style={{ transition: 'transform 0.2s ease-in-out' }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-          >
-            <FaEnvelope /> Email
-          </a>
-
-          {/* Twitter/X */}
-          <a
-            href="https://twitter.com/lambertElisha3"
-            target="_blank"
-            rel="noreferrer"
-            className="text-white text-decoration-none d-flex align-items-center gap-1"
-            style={{ transition: 'transform 0.2s ease-in-out' }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="1em"
-              viewBox="0 0 512 512"
-              fill="currentColor"
-              className="me-1"
-            >
-              <path d="M370.6 0H460L295.6 212.3 489 512H342.3L229.7 339.4 99.5 512H10.5L187.6 280.6 1 0H150.2l102.6 152L370.6 0z" />
-            </svg>
-            Twitter
-          </a>
+          <div className="col-md-4 text-md-end">
+            <p style={{ color: 'var(--text-dim)', fontSize: '13px', margin: 0 }}>
+              © {new Date().getFullYear()} Elisha Oigara. Built with React.
+            </p>
+          </div>
         </div>
-
-        <p className="mb-0 small">
-          &copy; {new Date().getFullYear()} Elisha Oigara. All rights reserved.
-        </p>
       </div>
     </footer>
   );

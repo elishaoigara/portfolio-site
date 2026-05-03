@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
-import { FaEnvelope, FaGithub, FaUser, FaCommentDots } from 'react-icons/fa';
-import { Toast, ToastContainer } from 'react-bootstrap';
+import { motion } from 'framer-motion';
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState('Send');
-  const [toast, setToast] = useState({ show: false, message: '', variant: 'success' });
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,188 +14,186 @@ function Contact() {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = 'Name is required';
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = 'Enter a valid email';
-    }
-    if (!formData.subject) newErrors.subject = 'Subject is required';
-    if (!formData.message) newErrors.message = 'Message is required';
+    if (!formData.name) newErrors.name = 'Required';
+    if (!formData.email || !/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = 'Valid email required';
+    if (!formData.subject) newErrors.subject = 'Required';
+    if (!formData.message) newErrors.message = 'Required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  const showToast = (message, variant = 'success') => {
-    setToast({ show: true, message, variant });
-    setTimeout(() => setToast({ show: false, message: '', variant: 'success' }), 5000);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-
-    setStatus('Sending...');
+    setStatus('sending');
     const form = new FormData();
-    Object.entries(formData).forEach(([key, value]) => form.append(key, value));
-
+    Object.entries(formData).forEach(([k, v]) => form.append(k, v));
     try {
-      const response = await fetch('https://formspree.io/f/xanjryon', {
-        method: 'POST',
-        body: form,
-        headers: { Accept: 'application/json' },
+      const res = await fetch('https://formspree.io/f/xanjryon', {
+        method: 'POST', body: form, headers: { Accept: 'application/json' },
       });
-
-      if (response.ok) {
-        setStatus('Send');
+      if (res.ok) {
+        setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
-        showToast('✅ Message sent successfully!');
       } else {
-        showToast('❌ Failed to send message. Try again later.', 'danger');
+        setStatus('error');
       }
     } catch {
-      showToast('❌ An error occurred. Please try again.', 'danger');
+      setStatus('error');
     }
   };
 
+  const inputStyle = (hasError) => ({
+    width: '100%',
+    padding: '12px 16px',
+    background: 'rgba(255,255,255,0.04)',
+    border: `1px solid ${hasError ? '#ef4444' : 'var(--border)'}`,
+    borderRadius: '10px',
+    color: 'var(--text)',
+    fontFamily: 'var(--font-body)',
+    fontSize: '14px',
+    outline: 'none',
+    transition: 'border-color 0.2s',
+  });
+
+  const contactInfo = [
+    { icon: '📧', label: 'Email', value: 'elishaoigara50@gmail.com', href: 'mailto:elishaoigara50@gmail.com' },
+    { icon: '💻', label: 'GitHub', value: 'github.com/elishaoigara', href: 'https://github.com/elishaoigara' },
+    { icon: '🔗', label: 'LinkedIn', value: 'linkedin.com/in/elishaoigara', href: 'https://linkedin.com/in/elishaoigara' },
+    { icon: '🐦', label: 'Twitter / X', value: '@lambertElisha3', href: 'https://twitter.com/lambertElisha3' },
+  ];
+
   return (
-    <section id="contact" className="py-5 text-light" style={{ background: 'transparent' }}>
+    <section id="contact" style={{ padding: '100px 0' }}>
       <div className="container">
-        <h2 className="mb-5 text-center fw-bold border-bottom border-secondary pb-3">Contact Me</h2>
-        <div className="row g-4">
-          {/* Info */}
-          <div className="col-12 col-md-5">
-            <div className="p-4 rounded shadow-sm" style={glassStyle}>
-              <h5 className="mb-3">Let’s connect 🤝</h5>
-              <ul className="list-unstyled">
-                <li className="mb-3">
-                  <FaEnvelope className="me-2 text-light" />
-                  <strong>Email:</strong><br />
-                  <a href="mailto:elishaoigara50@gmail.com" className="text-light text-decoration-none">
-                    elishaoigara50@gmail.com
-                  </a>
-                </li>
-                <li className="mb-3">
-                  <FaGithub className="me-2 text-light" />
-                  <strong>GitHub:</strong><br />
-                  <a
-                    href="https://github.com/elishaoigara"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-light text-decoration-none"
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <span className="section-label">// Contact</span>
+          <h2 className="section-title">Let's Work<br /><span style={{ background: 'var(--gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Together</span></h2>
+          <div className="section-divider" />
+          <p style={{ color: 'var(--text-muted)', maxWidth: '500px', marginBottom: '56px' }}>
+            Whether you have a project, a job opportunity, or just want to chat about technology — my inbox is open.
+          </p>
+        </motion.div>
+
+        <div className="row g-5">
+          {/* Left: info */}
+          <div className="col-lg-4">
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '40px' }}>
+                {contactInfo.map((c, i) => (
+                  <a key={i} href={c.href} target="_blank" rel="noreferrer"
+                    style={{ textDecoration: 'none' }}
                   >
-                    github.com/elishaoigara
+                    <div className="glass" style={{ padding: '16px 20px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '14px', transition: 'all 0.2s' }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; }}
+                    >
+                      <span style={{ fontSize: '20px' }}>{c.icon}</span>
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{c.label}</div>
+                        <div style={{ fontSize: '13px', color: 'var(--text)', fontWeight: 500 }}>{c.value}</div>
+                      </div>
+                    </div>
                   </a>
-                </li>
-              </ul>
-            </div>
+                ))}
+              </div>
+
+              {/* Availability card */}
+              <div className="glass" style={{ padding: '20px', borderRadius: '14px', borderColor: 'rgba(0,255,148,0.2)', background: 'rgba(0,255,148,0.03)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-3)', boxShadow: '0 0 8px var(--accent-3)', flexShrink: 0 }} />
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--accent-3)', fontWeight: 600 }}>AVAILABLE FOR WORK</span>
+                </div>
+                <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0, lineHeight: 1.6 }}>
+                  Open to full-stack contracts, freelance projects, and full-time remote roles. Response time: within 24 hours.
+                </p>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Form */}
-          <div className="col-12 col-md-7">
-            <div className="p-4 rounded shadow-sm" style={glassStyle}>
-              <form onSubmit={handleSubmit}>
-                {/* Name */}
-                <div className="input-group mb-3">
-                  <span className="input-group-text bg-dark text-light border-light"><FaUser /></span>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    className={`form-control bg-dark text-light border-light ${errors.name ? 'is-invalid' : ''}`}
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+          {/* Right: form */}
+          <div className="col-lg-8">
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
+              {status === 'success' ? (
+                <div className="glass" style={{ padding: '48px', borderRadius: '20px', textAlign: 'center', borderColor: 'rgba(0,255,148,0.2)' }}>
+                  <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>Message Sent!</h3>
+                  <p style={{ color: 'var(--text-muted)' }}>Thanks for reaching out. I'll get back to you within 24 hours.</p>
+                  <button onClick={() => setStatus('idle')} className="btn-outline-custom" style={{ marginTop: '20px' }}>Send Another</button>
                 </div>
+              ) : (
+                <div className="glass" style={{ padding: '36px', borderRadius: '20px' }}>
+                  <form onSubmit={handleSubmit}>
+                    <div className="row g-3" style={{ marginBottom: '16px' }}>
+                      <div className="col-md-6">
+                        <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-dim)', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Name</label>
+                        <input name="name" placeholder="John Doe" value={formData.name} onChange={handleChange}
+                          style={inputStyle(errors.name)}
+                          onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                          onBlur={e => e.target.style.borderColor = errors.name ? '#ef4444' : 'var(--border)'}
+                        />
+                        {errors.name && <span style={{ fontSize: '11px', color: '#ef4444', marginTop: '4px', display: 'block' }}>{errors.name}</span>}
+                      </div>
+                      <div className="col-md-6">
+                        <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-dim)', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Email</label>
+                        <input name="email" type="email" placeholder="john@company.com" value={formData.email} onChange={handleChange}
+                          style={inputStyle(errors.email)}
+                          onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                          onBlur={e => e.target.style.borderColor = errors.email ? '#ef4444' : 'var(--border)'}
+                        />
+                        {errors.email && <span style={{ fontSize: '11px', color: '#ef4444', marginTop: '4px', display: 'block' }}>{errors.email}</span>}
+                      </div>
+                    </div>
 
-                {/* Email */}
-                <div className="input-group mb-3">
-                  <span className="input-group-text bg-dark text-light border-light"><FaEnvelope /></span>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    className={`form-control bg-dark text-light border-light ${errors.email ? 'is-invalid' : ''}`}
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+                    <div style={{ marginBottom: '16px' }}>
+                      <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-dim)', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Subject</label>
+                      <select name="subject" value={formData.subject} onChange={handleChange}
+                        style={{ ...inputStyle(errors.subject), cursor: 'pointer' }}
+                        onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                        onBlur={e => e.target.style.borderColor = errors.subject ? '#ef4444' : 'var(--border)'}
+                      >
+                        <option value="" style={{ background: 'var(--bg-2)' }}>Select a subject…</option>
+                        <option value="Full-Stack Project" style={{ background: 'var(--bg-2)' }}>🧱 Full-Stack Project</option>
+                        <option value="AI Integration" style={{ background: 'var(--bg-2)' }}>🤖 AI Integration</option>
+                        <option value="Frontend Development" style={{ background: 'var(--bg-2)' }}>⚛️ Frontend Development</option>
+                        <option value="Job Opportunity" style={{ background: 'var(--bg-2)' }}>💼 Job Opportunity</option>
+                        <option value="API Development" style={{ background: 'var(--bg-2)' }}>🔌 API Development</option>
+                        <option value="Other" style={{ background: 'var(--bg-2)' }}>💬 Other</option>
+                      </select>
+                      {errors.subject && <span style={{ fontSize: '11px', color: '#ef4444', marginTop: '4px', display: 'block' }}>{errors.subject}</span>}
+                    </div>
+
+                    <div style={{ marginBottom: '24px' }}>
+                      <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-dim)', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Message</label>
+                      <textarea name="message" placeholder="Tell me about your project or opportunity…" rows={5} value={formData.message} onChange={handleChange}
+                        style={{ ...inputStyle(errors.message), resize: 'vertical' }}
+                        onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                        onBlur={e => e.target.style.borderColor = errors.message ? '#ef4444' : 'var(--border)'}
+                      />
+                      {errors.message && <span style={{ fontSize: '11px', color: '#ef4444', marginTop: '4px', display: 'block' }}>{errors.message}</span>}
+                    </div>
+
+                    {status === 'error' && (
+                      <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '12px 16px', marginBottom: '16px', fontSize: '13px', color: '#ef4444' }}>
+                        Something went wrong. Please try again or email me directly.
+                      </div>
+                    )}
+
+                    <button type="submit" className="btn-primary-custom" style={{ width: '100%', justifyContent: 'center', padding: '14px' }} disabled={status === 'sending'}>
+                      {status === 'sending' ? (
+                        <><span style={{ width: '14px', height: '14px', border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.8s linear infinite' }} /> Sending…</>
+                      ) : 'Send Message →'}
+                    </button>
+                  </form>
                 </div>
-
-                {/* Subject Dropdown */}
-                <div className="mb-3">
-                  <label className="form-label text-light">Subject</label>
-                  <select
-                    name="subject"
-                    className={`form-select bg-dark text-light border-light ${errors.subject ? 'is-invalid' : ''}`}
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">-- Select Subject --</option>
-                    <option value="Web Design">💻 Web Design</option>
-                    <option value="Presentation Design">🖼️ Presentation Design</option>
-                    <option value="Business Profile Creation">🏢 Business Profile Creation</option>
-                    <option value="Research & Writing">📝 Research & Writing</option>
-                    <option value="Other">❓ Other</option>
-                  </select>
-                  {errors.subject && <div className="invalid-feedback">{errors.subject}</div>}
-                </div>
-
-                {/* Message */}
-                <div className="input-group mb-3">
-                  <span className="input-group-text bg-dark text-light border-light"><FaCommentDots /></span>
-                  <textarea
-                    name="message"
-                    placeholder="Your Message"
-                    rows="4"
-                    className={`form-control bg-dark text-light border-light ${errors.message ? 'is-invalid' : ''}`}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.message && <div className="invalid-feedback">{errors.message}</div>}
-                </div>
-
-                {/* Submit */}
-                <button type="submit" className="btn btn-outline-light w-100" disabled={status === 'Sending...'}>
-                  {status === 'Sending...' && (
-                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                  )}
-                  {status}
-                </button>
-              </form>
-            </div>
+              )}
+            </motion.div>
           </div>
         </div>
-
-        {/* Toast Notification */}
-        <ToastContainer className="p-3 position-fixed top-0 end-0" style={{ zIndex: 9999 }}>
-          <Toast
-            show={toast.show}
-            bg={toast.variant}
-            onClose={() => setToast({ ...toast, show: false })}
-            delay={5000}
-            autohide
-          >
-            <Toast.Body className="text-white">{toast.message}</Toast.Body>
-          </Toast>
-        </ToastContainer>
       </div>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </section>
   );
 }
-
-const glassStyle = {
-  background: 'rgba(255, 255, 255, 0.05)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.15)',
-  borderRadius: '10px',
-  boxShadow: '0 4px 30px rgba(0,0,0,0.1)',
-  transition: 'all 0.3s ease-in-out',
-};
 
 export default Contact;

@@ -1,77 +1,117 @@
 import React from 'react';
-import { FaCode, FaPaintBrush, FaTools, FaPenNib, FaSearch, FaChalkboardTeacher, FaLaptop } from 'react-icons/fa';
-import { MdSlideshow } from 'react-icons/md';
+import { motion } from 'framer-motion';
 
 function Services() {
   const services = [
     {
-      icon: <FaCode size={24} />,
+      icon: '🧱',
+      title: 'Full-Stack Web Development',
+      description: 'End-to-end applications — React/Next.js frontend + Node.js/Express backend, database design, auth, and deployment.',
+      tags: ['React', 'Node.js', 'PostgreSQL', 'Firebase'],
+      price: 'From $300/project',
+      highlight: true,
+    },
+    {
+      icon: '🤖',
+      title: 'AI-Integrated Applications',
+      description: 'Integrate LLM APIs (OpenAI, Anthropic) into your product — chatbots, content generation, smart automation, and RAG pipelines.',
+      tags: ['OpenAI API', 'Claude API', 'LangChain', 'Supabase'],
+      price: 'From $400/project',
+      highlight: true,
+    },
+    {
+      icon: '⚛️',
       title: 'Frontend Development',
-      description: 'Responsive, modern UIs using React, Tailwind, Bootstrap, and more.',
+      description: 'Pixel-perfect, responsive UIs using React/Next.js with Tailwind, animations, and performance optimization.',
+      tags: ['React', 'Tailwind', 'TypeScript', 'Framer Motion'],
       price: 'From $150/project',
     },
     {
-      icon: <FaTools size={24} />,
-      title: 'Web App Setup',
-      description: 'End-to-end deployment: domain, hosting, auth, database, and backups.',
-      price: 'From $200/app',
+      icon: '🔌',
+      title: 'REST API Development',
+      description: 'Design and build clean, documented REST APIs with authentication, validation, and database integration.',
+      tags: ['Node.js', 'Express', 'JWT', 'Swagger'],
+      price: 'From $200/project',
     },
     {
-      icon: <FaPaintBrush size={24} />,
-      title: 'UI/UX Design',
-      description: 'Wireframing and designing with Figma, Canva, or Adobe XD.',
-      price: 'From $100/design',
+      icon: '🚀',
+      title: 'Web App Deployment',
+      description: 'Full deployment pipeline — CI/CD, custom domain, SSL, env setup, monitoring on Vercel, Netlify, or Railway.',
+      tags: ['Vercel', 'Netlify', 'Railway', 'GitHub Actions'],
+      price: 'From $80/app',
     },
     {
-      icon: <FaPenNib size={24} />,
-      title: 'Academic & Content Writing',
-      description: 'Essays, reports, blog posts, and more — clear, concise, and original.',
-      price: 'Starting at $10/page',
-    },
-    {
-      icon: <FaSearch size={24} />,
-      title: 'Research Assistance',
-      description: 'Topic exploration, citations, referencing, and literature review support.',
-      price: 'Starting at $10/page',
-    },
-    {
-      icon: <MdSlideshow size={24} />,
-      title: 'Presentations',
-      description: 'Professionally designed slides using Google Slides, Canva, Figma, or PowerPoint — ideal for business pitches, investor decks, company profiles, and more.',
+      icon: '📊',
+      title: 'Presentations & Design',
+      description: 'Professional pitch decks, business proposals, and company profiles designed in Figma, Canva, or PowerPoint.',
+      tags: ['Figma', 'Canva', 'PowerPoint'],
       price: '$8/slide',
     },
     {
-      icon: <FaChalkboardTeacher size={24} />,
-      title: 'Class Package (Turnkey)',
-      description: 'Complete handling of writing, slides, and research for a full course or class.',
-      price: 'From $250/class',
+      icon: '✍️',
+      title: 'Technical Writing',
+      description: 'API documentation, technical blog posts, README files, research reports, and academic writing assistance.',
+      tags: ['Documentation', 'Research', 'Content'],
+      price: 'From $10/page',
     },
   ];
 
   return (
-    <section id="services" className="py-5 text-light" style={{ background: 'transparent' }} data-aos="fade-up">
+    <section id="services" style={{ padding: '100px 0', background: 'linear-gradient(180deg, transparent 0%, rgba(13,17,23,0.5) 50%, transparent 100%)' }}>
       <div className="container">
-        <h2 className="mb-5 text-center fw-bold border-bottom border-secondary pb-3">Services</h2>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <span className="section-label">// Services</span>
+          <h2 className="section-title">What I Can<br /><span style={{ background: 'var(--gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Build for You</span></h2>
+          <div className="section-divider" />
+        </motion.div>
+
         <div className="row g-4">
-          {services.map((service, index) => (
-            <div className="col-sm-12 col-md-6 col-lg-4" key={index}>
-              <div
-                className="p-4 h-100 rounded shadow-sm"
+          {services.map((s, i) => (
+            <div key={i} className={s.highlight ? 'col-lg-6' : 'col-lg-4'}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="glass"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  padding: '28px',
+                  borderRadius: '20px',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  border: s.highlight ? '1px solid rgba(0,212,255,0.2)' : '1px solid var(--border)',
+                  background: s.highlight ? 'rgba(0,212,255,0.03)' : 'var(--surface)',
                 }}
               >
-                <div className="mb-3 text-primary">{service.icon}</div>
-                <h5 className="fw-bold text-light">{service.title}</h5>
-                <p className="text-light small">{service.description}</p>
-                <p className="text-info fw-semibold mt-3">{service.price}</p>
-              </div>
+                <div style={{ fontSize: '28px', marginBottom: '16px' }}>{s.icon}</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '18px', color: 'var(--text)', margin: 0 }}>{s.title}</h3>
+                  {s.highlight && <span className="tag" style={{ marginLeft: '8px', flexShrink: 0 }}>Popular</span>}
+                </div>
+                <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.65, flex: 1, marginBottom: '16px' }}>{s.description}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
+                  {s.tags.map((t, j) => <span key={j} className="tag tag-purple" style={{ fontSize: '11px' }}>{t}</span>)}
+                </div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--accent)', fontWeight: 600 }}>{s.price}</div>
+              </motion.div>
             </div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          style={{ textAlign: 'center', marginTop: '60px' }}
+        >
+          <p style={{ color: 'var(--text-muted)', marginBottom: '20px', fontSize: '16px' }}>
+            Have a project in mind? Let's discuss scope and pricing.
+          </p>
+          <a href="#contact" className="btn-primary-custom" style={{ fontSize: '15px', padding: '14px 36px' }}>
+            Start a Project →
+          </a>
+        </motion.div>
       </div>
     </section>
   );
