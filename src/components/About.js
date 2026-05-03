@@ -1,90 +1,296 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import profilePic from '../assets/elisha.jpeg';
 
 function About() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20,
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const highlights = [
     { icon: '🌍', label: 'Location', value: 'Nairobi, Kenya' },
     { icon: '⚡', label: 'Focus', value: 'Full-Stack · AI-Augmented Dev' },
-    { icon: '🎓', label: 'Education', value: 'ALX SE Graduate · MKU BIT · CS (UoPeople)' },
-    { icon: '🤖', label: 'Superpower', value: 'AI tools in every workflow, daily' },
+    { icon: '🎓', label: 'Education', value: 'ALX SE · MKU BIT · CS (UoPeople)' },
+    { icon: '🤖', label: 'Superpower', value: 'AI tools in every workflow' },
   ];
 
   return (
-    <section id="about" style={{ padding: '100px 0' }}>
-      <div className="container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+    <section
+      id="about"
+      style={{
+        padding: '120px 0',
+        position: 'relative',
+        overflow: 'hidden',
+        background:
+          'linear-gradient(135deg, rgba(5,8,12,0.97) 0%, rgba(8,14,22,0.95) 100%)',
+      }}
+    >
+      {/* ── Ambient Orbs ── */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '10%',
+          left: '10%',
+          width: '500px',
+          height: '500px',
+          background:
+            'radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 65%)',
+          borderRadius: '50%',
+          transform: `translate(${mousePos.x * 0.2}px, ${
+            mousePos.y * 0.2
+          }px)`,
+          transition: 'transform 1s ease',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          right: '10%',
+          width: '400px',
+          height: '400px',
+          background:
+            'radial-gradient(circle, rgba(123,97,255,0.05) 0%, transparent 65%)',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* ── Grid Overlay ── */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          backgroundImage: `
+            linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: '64px 64px',
+        }}
+      />
+
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+        {/* ── Header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
           <span className="section-label">{'// About Me'}</span>
-          <h2 className="section-title">Engineer. Builder.<br /><span style={{ background: 'var(--gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>AI Practitioner.</span></h2>
+
+          <h2 className="section-title">
+            Engineer. Builder.
+            <br />
+            <span
+              style={{
+                background:
+                  'linear-gradient(135deg, #00d4ff 0%, #7b61ff 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              AI Practitioner.
+            </span>
+          </h2>
+
           <div className="section-divider" />
         </motion.div>
 
         <div className="row align-items-center g-5">
-          <div className="col-lg-5">
+          {/* ── LEFT: IMAGE ── */}
+          <div className="col-lg-5 d-flex justify-content-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              style={{ position: 'relative' }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '320px',
+              }}
             >
-              <div style={{
-                position: 'absolute', inset: 0, background: 'var(--gradient)', borderRadius: '20px', opacity: 0.1, transform: 'rotate(3deg)',
-              }} />
+              {/* Gradient border */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: '-4px',
+                  borderRadius: '20px',
+                  background:
+                    'conic-gradient(from 0deg, #00d4ff, #7b61ff, #00ff94, #00d4ff)',
+                  animation: 'spin-slow 8s linear infinite',
+                }}
+              />
+
+              {/* Image */}
               <img
                 src={profilePic}
                 alt="Elisha Oigara"
-                style={{ width: '100%', borderRadius: '16px', position: 'relative', objectFit: 'cover', aspectRatio: '1', border: '1px solid var(--border)' }}
+                style={{
+                  width: '100%',
+                  borderRadius: '18px',
+                  position: 'relative',
+                  zIndex: 1,
+                  objectFit: 'cover',
+                }}
               />
-              {/* Experience badge */}
-              <div style={{
-                position: 'absolute', bottom: '20px', right: '-20px',
-                background: 'var(--bg-2)', border: '1px solid var(--border-bright)',
-                borderRadius: '12px', padding: '16px 20px', backdropFilter: 'blur(20px)',
-              }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 800, background: 'var(--gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>ALX</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)' }}>SE Graduate '25</div>
-              </div>
+
+              {/* Floating badge */}
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                style={{
+                  position: 'absolute',
+                  bottom: '-15px',
+                  right: '-20px',
+                  background: 'rgba(13,17,23,0.95)',
+                  border: '1px solid rgba(0,212,255,0.3)',
+                  borderRadius: '12px',
+                  padding: '12px 16px',
+                  backdropFilter: 'blur(16px)',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: '11px',
+                    color: '#00d4ff',
+                    fontFamily: 'var(--font-mono)',
+                    letterSpacing: '0.1em',
+                  }}
+                >
+                  ALX SE
+                </div>
+                <div
+                  style={{
+                    fontWeight: 700,
+                    color: '#f0f6ff',
+                    marginTop: '2px',
+                  }}
+                >
+                  Graduate '25
+                </div>
+              </motion.div>
             </motion.div>
           </div>
 
+          {/* ── RIGHT: CONTENT ── */}
           <div className="col-lg-7">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.15 }}
+              transition={{ duration: 0.7 }}
+              style={{
+                background: 'rgba(13,17,23,0.85)',
+                border: '1px solid rgba(255,255,255,0.06)',
+                borderRadius: '20px',
+                padding: '32px',
+                backdropFilter: 'blur(16px)',
+                position: 'relative',
+                overflow: 'hidden',
+              }}
             >
-              <p style={{ color: 'var(--text-muted)', fontSize: '16px', lineHeight: 1.8, marginBottom: '20px' }}>
-                I'm <strong style={{ color: 'var(--text)' }}>Lambert Elisha Oigara</strong> — a full-stack software engineer based in Nairobi, Kenya. I build complete web applications from database design to polished user interfaces, with a sharp focus on performance, clean code, and real-world impact.
-              </p>
-              <p style={{ color: 'var(--text-muted)', fontSize: '16px', lineHeight: 1.8, marginBottom: '20px' }}>
-                What sets me apart? I integrate <strong style={{ color: 'var(--accent)' }}>AI tools into every stage of my development workflow</strong> — using Claude Code, Cursor, GitHub Copilot, and other cutting-edge tools daily to accelerate delivery, reduce bugs, and write production-grade code at speed. AI isn't a trend for me; it's my development stack.
-              </p>
-              <p style={{ color: 'var(--text-muted)', fontSize: '16px', lineHeight: 1.8, marginBottom: '32px' }}>
-                I'm currently advancing my formal education in <strong style={{ color: 'var(--text)' }}>Business Information Technology at Mount Kenya University</strong> and <strong style={{ color: 'var(--text)' }}>Computer Science at University of the People</strong>, combining academic depth with hands-on project experience.
+              {/* Glow */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    'radial-gradient(circle at top right, rgba(0,212,255,0.06), transparent 60%)',
+                  pointerEvents: 'none',
+                }}
+              />
+
+              <p style={{ color: '#7a8fa8', lineHeight: 1.8 }}>
+                I'm <strong style={{ color: '#f0f6ff' }}>Elisha Oigara</strong> —
+                a full-stack engineer building scalable systems and polished web
+                apps with a strong focus on performance and real-world impact.
               </p>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '32px' }}>
+              <p style={{ color: '#7a8fa8', lineHeight: 1.8 }}>
+                I integrate{' '}
+                <strong style={{ color: '#00d4ff' }}>AI tools</strong> into every
+                stage of development to ship faster, reduce bugs, and build
+                production-grade applications.
+              </p>
+
+              {/* Highlights */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '12px',
+                  marginTop: '24px',
+                }}
+              >
                 {highlights.map((h, i) => (
-                  <div key={i} className="glass" style={{ padding: '16px', borderRadius: '12px' }}>
-                    <div style={{ fontSize: '18px', marginBottom: '4px' }}>{h.icon}</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '2px' }}>{h.label}</div>
-                    <div style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text)' }}>{h.value}</div>
-                  </div>
+                  <motion.div
+                    key={i}
+                    whileHover={{ y: -6 }}
+                    transition={{ type: 'spring', stiffness: 120 }}
+                    style={{
+                      padding: '16px',
+                      borderRadius: '14px',
+                      background: 'rgba(13,17,23,0.9)',
+                      border: '1px solid rgba(255,255,255,0.06)',
+                      backdropFilter: 'blur(12px)',
+                    }}
+                  >
+                    <div style={{ fontSize: '18px' }}>{h.icon}</div>
+                    <div style={{ fontSize: '11px', color: '#4a6680' }}>
+                      {h.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '13px',
+                        color: '#f0f6ff',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {h.value}
+                    </div>
+                  </motion.div>
                 ))}
               </div>
 
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <a href="#contact" className="btn-primary-custom">Get in Touch</a>
-                <a href="https://github.com/elishaoigara" target="_blank" rel="noreferrer" className="btn-outline-custom">
-                  <i className="fab fa-github" /> GitHub Profile
+              {/* Buttons */}
+              <div style={{ marginTop: '28px', display: 'flex', gap: '12px' }}>
+                <a href="#contact" className="btn-primary-custom">
+                  Get in Touch
+                </a>
+                <a
+                  href="https://github.com/elishaoigara"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-outline-custom"
+                >
+                  GitHub
                 </a>
               </div>
             </motion.div>
           </div>
         </div>
       </div>
+
+      {/* Animation */}
+      <style>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </section>
   );
 }
