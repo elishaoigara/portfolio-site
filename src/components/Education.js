@@ -1,102 +1,43 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-function Education() {
-  const items = [
-    {
-      institution: 'University of the People',
-      degree: 'Bachelor of Science — Computer Science',
-      period: '2024 – Expected Dec 2027',
-      status: 'In Progress',
-      statusColor: 'var(--accent)',
-      description: 'Online US-accredited university. Covering algorithms, data structures, software engineering, OS, databases, and AI fundamentals.',
-      icon: '🎓',
-    },
-    {
-      institution: 'Mount Kenya University',
-      degree: 'Bachelor of Science — Business Information Technology',
-      period: '2024 – Expected Aug 2027',
-      status: 'In Progress',
-      statusColor: 'var(--accent)',
-      description: 'Integrating business strategy with software systems — covering project management, enterprise systems, business analysis, and information systems architecture.',
-      icon: '🏛️',
-    },
-    {
-      institution: 'ALX Africa',
-      degree: 'Software Engineering Programme',
-      period: 'May 2024 – July 2025',
-      status: 'Graduated ✓',
-      statusColor: 'var(--accent-3)',
-      description: 'Intensive 12-month programme covering C, Python, JavaScript, React, Node.js, Linux, Shell scripting, and software engineering principles. Specialization in Front-End.',
-      score: '72.01% overall · Month 1 peak: 120.43%',
-      certUrl: 'https://savanna.alxafrica.com/certificates/PscX8Cf7FN',
-      icon: '🚀',
-    },
-  ];
+const ITEMS = [
+  {institution:'University of the People',degree:'B.Sc. Computer Science',period:'2024 – Dec 2027',status:'In Progress',sc:'#00d4ff',desc:'Online US-accredited. Algorithms, data structures, software engineering, OS, databases, AI fundamentals.',icon:'🎓'},
+  {institution:'Mount Kenya University',degree:'B.Sc. Business Information Technology',period:'2024 – Aug 2027',status:'In Progress',sc:'#00d4ff',desc:'Business strategy with software systems — project management, enterprise systems, business analysis.',icon:'🏛️'},
+  {institution:'ALX Africa',degree:'Software Engineering — Front-End Specialisation',period:'May 2024 – Jul 2025',status:'Graduated ✓',sc:'#00ff94',desc:'Intensive 12-month programme: C, Python, JavaScript, React, Node.js, Linux, Shell scripting.',score:'72.01% overall · Month 1: 120.43%',certUrl:'https://savanna.alxafrica.com/certificates/PscX8Cf7FN',icon:'🚀'},
+];
 
+export default function Education() {
   return (
-    <section id="education" style={{ padding: '100px 0' }}>
+    <section id="education" style={{ padding:'100px 0', backgroundColor:'#0b0f17' }}>
       <div className="container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+        <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
           <span className="section-label">{'// Education'}</span>
-          <h2 className="section-title">Academic<br /><span style={{ background: 'var(--gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Background</span></h2>
-          <div className="section-divider" />
+          <h2 className="section-title">Academic<br/>
+            <span style={{background:'linear-gradient(135deg,#00d4ff,#7b61ff)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>Background</span>
+          </h2>
+          <div className="section-divider"/>
         </motion.div>
 
-        {/* Timeline */}
-        <div style={{ position: 'relative' }}>
-          {/* Line */}
-          <div style={{
-            position: 'absolute', left: '24px', top: 0, bottom: 0, width: '1px',
-            background: 'linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 50%, transparent 100%)',
-          }} className="d-none d-md-block" />
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-            {items.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}
-              >
-                {/* Dot */}
-                <div style={{
-                  flexShrink: 0, width: '48px', height: '48px', borderRadius: '50%',
-                  background: 'var(--bg-2)', border: '2px solid var(--border-bright)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '20px', zIndex: 1,
-                }} className="d-none d-md-flex">
+        <div style={{position:'relative'}}>
+          <div style={{position:'absolute',left:23,top:0,bottom:0,width:1,background:'linear-gradient(180deg,#00d4ff,#7b61ff 50%,transparent)'}} className="d-none d-md-block"/>
+          <div style={{display:'flex',flexDirection:'column',gap:24}}>
+            {ITEMS.map((item,i) => (
+              <motion.div key={i} initial={{opacity:0,x:-22}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{delay:i*.13}}
+                style={{display:'flex',gap:28,alignItems:'flex-start'}}>
+                <div className="d-none d-md-flex" style={{flexShrink:0,width:48,height:48,borderRadius:'50%',background:'#0b0f17',border:'2px solid rgba(255,255,255,0.12)',alignItems:'center',justifyContent:'center',fontSize:20,zIndex:1}}>
                   {item.icon}
                 </div>
-
-                <div className="glass" style={{ flex: 1, padding: '28px', borderRadius: '20px' }}>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '18px', color: 'var(--text)', margin: 0 }}>
-                      {item.institution}
-                    </h3>
-                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                      <span style={{
-                        fontFamily: 'var(--font-mono)', fontSize: '11px', padding: '3px 10px',
-                        borderRadius: '100px', border: `1px solid ${item.statusColor}30`,
-                        color: item.statusColor, background: `${item.statusColor}10`,
-                      }}>{item.status}</span>
-                    </div>
+                <div style={{flex:1,padding:'24px 26px',borderRadius:16,background:'#0f1520',border:'1px solid rgba(255,255,255,0.08)'}}>
+                  <div style={{display:'flex',flexWrap:'wrap',gap:10,justifyContent:'space-between',marginBottom:8}}>
+                    <h3 style={{fontFamily:'Syne,sans-serif',fontWeight:700,fontSize:18,color:'#e4ecf5',margin:0}}>{item.institution}</h3>
+                    <span style={{fontFamily:'JetBrains Mono,monospace',fontSize:11,padding:'3px 10px',borderRadius:'100px',border:`1px solid ${item.sc}50`,color:item.sc,background:`${item.sc}15`}}>{item.status}</span>
                   </div>
-                  <p style={{ color: 'var(--accent)', fontWeight: 600, fontSize: '14px', marginBottom: '4px' }}>{item.degree}</p>
-                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--text-dim)', marginBottom: '12px' }}>{item.period}</p>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.65, marginBottom: item.score ? '12px' : 0 }}>{item.description}</p>
-                  {item.score && (
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--accent-3)', marginBottom: item.certUrl ? '12px' : 0 }}>
-                      📊 {item.score}
-                    </div>
-                  )}
-                  {item.certUrl && (
-                    <a href={item.certUrl} target="_blank" rel="noreferrer" className="btn-outline-custom" style={{ padding: '7px 16px', fontSize: '12px', marginTop: '8px' }}>
-                      View Certificate ↗
-                    </a>
-                  )}
+                  <p style={{color:'#00d4ff',fontWeight:600,fontSize:14,marginBottom:4}}>{item.degree}</p>
+                  <p style={{fontFamily:'JetBrains Mono,monospace',fontSize:12,color:'#4d6478',marginBottom:12}}>{item.period}</p>
+                  <p style={{color:'#8fa3ba',fontSize:14,lineHeight:1.7,marginBottom:item.score?10:0}}>{item.desc}</p>
+                  {item.score && <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:12,color:'#00ff94',marginBottom:item.certUrl?12:0}}>📊 {item.score}</div>}
+                  {item.certUrl && <a href={item.certUrl} target="_blank" rel="noreferrer" className="btn-outline-custom" style={{padding:'7px 16px',fontSize:12,marginTop:8}}>View Certificate ↗</a>}
                 </div>
               </motion.div>
             ))}
@@ -106,5 +47,3 @@ function Education() {
     </section>
   );
 }
-
-export default Education;

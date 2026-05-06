@@ -7,7 +7,7 @@ function ReachMeModal() {
     { label: 'Email Me', href: 'mailto:elishaoigara50@gmail.com', icon: '📧', color: 'var(--accent)' },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/elishaoigara', icon: '🔗', color: '#0077b5' },
     { label: 'GitHub', href: 'https://github.com/elishaoigara', icon: '💻', color: 'var(--text)' },
-    { label: 'Twitter / X', href: 'https://twitter.com/lambertElisha3', icon: '🐦', color: '#1da1f2' },
+    
   ];
 
   return (
