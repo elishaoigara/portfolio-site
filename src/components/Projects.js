@@ -193,7 +193,7 @@ function FeaturedCard({p}) {
 
 /* ================== REGULAR ================== */
 function RegularCard({p,i}) {
-  const ac = p.accent || C.cyan;
+ 
 
   return (
     <motion.div
