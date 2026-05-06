@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const ITEMS = [
   {institution:'University of the People',degree:'B.Sc. Computer Science',period:'2024 – Dec 2027',status:'In Progress',sc:'#00d4ff',desc:'Online US-accredited. Algorithms, data structures, software engineering, OS, databases, AI fundamentals.',icon:'🎓'},
-  {institution:'Mount Kenya University',degree:'B.Sc. Business Information Technology',period:'2024 – Aug 2027',status:'In Progress',sc:'#00d4ff',desc:'Business strategy with software systems — project management, enterprise systems, business analysis.',icon:'🏛️'},
+  {institution:'Mount Kenya University',degree:'B.Sc. Business Information Technology',period:'2024 – Aug 2028',status:'In Progress',sc:'#00d4ff',desc:'Business strategy with software systems — project management, enterprise systems, business analysis.',icon:'🏛️'},
   {institution:'ALX Africa',degree:'Software Engineering — Front-End Specialisation',period:'May 2024 – Jul 2025',status:'Graduated ✓',sc:'#00ff94',desc:'Intensive 12-month programme: C, Python, JavaScript, React, Node.js, Linux, Shell scripting.',score:'72.01% overall · Month 1: 120.43%',certUrl:'https://savanna.alxafrica.com/certificates/PscX8Cf7FN',icon:'🚀'},
 ];
 
