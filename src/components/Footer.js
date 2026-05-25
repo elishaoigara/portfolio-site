@@ -1,133 +1,196 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
-const C = {
-  cyan:'#00d4ff',
-  purple:'#7b61ff',
-  green:'#00ff94',
-  t1:'#e4ecf5',
-  t2:'#8fa3ba',
-  t3:'#4d6478',
-};
+const SOCIALS = [
+  { href:'https://github.com/elishaoigara',      icon:'fab fa-github'   },
+  { href:'https://linkedin.com/in/elishaoigara', icon:'fab fa-linkedin' },
+  { href:'mailto:elishaoigara50@gmail.com',      icon:'fas fa-envelope' },
+];
 
-function Footer() {
+export default function Footer() {
   return (
-    <footer style={{
-      padding:'60px 24px',
-      background:'#0b0f17',
-      borderTop:'1px solid rgba(255,255,255,0.06)',
-      position:'relative',
-      overflow:'hidden'
-    }}>
-
-      {/* subtle glow background */}
-      <div style={{
-        position:'absolute',
-        inset:0,
-        background:'radial-gradient(circle at 50% 0%, rgba(0,212,255,0.08), transparent 60%)',
-        pointerEvents:'none'
-      }}/>
-
-      <div className="container" style={{position:'relative'}}>
-
-        <div className="row align-items-center">
-
+    <footer style={{ background:'#0b0f17', padding:'80px 0 40px' }}>
+      <div className="container" style={{ padding:'0 24px' }}>
+        <div className="row g-5">
+          
           {/* LEFT */}
-          <div className="col-md-4 mb-4 mb-md-0">
-            <a href="#hero" style={{
-              fontFamily:"'Syne',sans-serif",
-              fontWeight:800,
-              fontSize:20,
-              textDecoration:'none',
-              background:'linear-gradient(135deg,#00d4ff,#7b61ff)',
-              WebkitBackgroundClip:'text',
-              WebkitTextFillColor:'transparent'
-            }}>
-              Elisha Oigara
-            </a>
-
-            <p style={{
-              color:C.t2,
-              fontSize:13,
-              marginTop:8
-            }}>
-              Full-Stack Developer · AI Systems Builder
-            </p>
-          </div>
-
-          {/* CENTER SOCIALS */}
-          <div className="col-md-4 mb-4 mb-md-0 text-center">
-            <div style={{
-              display:'flex',
-              gap:18,
-              justifyContent:'center'
-            }}>
-
-              {[
-                { href:'https://github.com/elishaoigara', icon:'fab fa-github' },
-                { href:'https://linkedin.com', icon:'fab fa-linkedin' },
-                { href:'mailto:elishaoigara50@gmail.com', icon:'fas fa-envelope' },
-              ].map((s,i)=>(
-                <a
-                  key={i}
-                  href={s.href}
-                  target="_blank"
+          <div className="col-lg-5">
+            <motion.a 
+              href="#hero" 
+              initial={{ opacity:0, y:10 }}
+              whileInView={{ opacity:1, y:0 }}
+              viewport={{ once:true }}
+              style={{
+                fontFamily:"'Syne',sans-serif", 
+                fontWeight:800, 
+                fontSize:24,
+                background:'linear-gradient(135deg,#00d4ff,#7b61ff)',
+                WebkitBackgroundClip:'text', 
+                WebkitTextFillColor:'transparent',
+                textDecoration:'none', 
+                display:'inline-block',
+                marginBottom:20
+              }}
+            >
+              EO<span style={{ fontSize:12, WebkitTextFillColor:'#00d4ff', marginLeft:4 }}>{'</>'}</span>
+            </motion.a>
+            
+            <motion.p 
+              initial={{ opacity:0 }}
+              whileInView={{ opacity:1 }}
+              viewport={{ once:true }}
+              transition={{ delay:.1 }}
+              style={{ color:'#8fa3ba', fontSize:16, lineHeight:1.7, maxWidth:400, marginBottom:28 }}
+            >
+              Building scalable, AI-powered web applications with modern technologies. 
+              Let's create something amazing together.
+            </motion.p>
+            
+            <motion.div 
+              initial={{ opacity:0 }}
+              whileInView={{ opacity:1 }}
+              viewport={{ once:true }}
+              transition={{ delay:.2 }}
+              style={{ display:'flex', gap:16, alignItems:'center', flexWrap:'wrap' }}
+            >
+              {SOCIALS.map((s,i) => (
+                <a 
+                  key={i} 
+                  href={s.href} 
+                  target={s.href.startsWith('http') ? "_blank" : undefined} 
                   rel="noreferrer"
                   style={{
-                    width:42,
-                    height:42,
-                    borderRadius:12,
+                    width:44,
+                    height:44,
                     display:'flex',
                     alignItems:'center',
                     justifyContent:'center',
-                    color:C.t2,
-                    border:'1px solid rgba(255,255,255,0.08)',
-                    background:'rgba(255,255,255,0.02)',
-                    transition:'all .25s ease',
-                    fontSize:16
+                    borderRadius:'50%',
+                    background:'rgba(255,255,255,.05)',
+                    color:'#8fa3ba',
+                    fontSize:18,
+                    transition:'all .25s',
+                    textDecoration:'none'
                   }}
-                  onMouseEnter={e=>{
-                    e.currentTarget.style.color=C.cyan;
-                    e.currentTarget.style.borderColor='rgba(0,212,255,0.4)';
-                    e.currentTarget.style.boxShadow='0 0 20px rgba(0,212,255,0.2)';
-                    e.currentTarget.style.transform='translateY(-2px)';
+                  onMouseEnter={e => {
+                    e.target.style.background = 'linear-gradient(135deg,#00d4ff,#7b61ff)';
+                    e.target.style.color = '#07090d';
+                    e.target.style.transform = 'translateY(-3px)';
                   }}
-                  onMouseLeave={e=>{
-                    e.currentTarget.style.color=C.t2;
-                    e.currentTarget.style.borderColor='rgba(255,255,255,0.08)';
-                    e.currentTarget.style.boxShadow='none';
-                    e.currentTarget.style.transform='translateY(0)';
+                  onMouseLeave={e => {
+                    e.target.style.background = 'rgba(255,255,255,.05)';
+                    e.target.style.color = '#8fa3ba';
+                    e.target.style.transform = 'translateY(0)';
                   }}
+                  aria-label={`Visit my ${s.href.includes('github') ? 'GitHub' : s.href.includes('linkedin') ? 'LinkedIn' : 'email'}`}
                 >
                   <i className={s.icon}/>
                 </a>
               ))}
-
+            </motion.div>
+          </div>
+          
+          {/* RIGHT */}
+          <div className="col-lg-6 offset-lg-1">
+            <div className="row">
+              {[
+                { title:'Navigation', links:[
+                  { href:'#hero',      label:'Home'      },
+                  { href:'#about',     label:'About'     },
+                  { href:'#skills',    label:'Skills'    },
+                  { href:'#projects',  label:'Projects'  },
+                ]},
+                { title:'More', links:[
+                  { href:'#services',  label:'Services'  },
+                  { href:'#education', label:'Education' },
+                  { href:'#contact',   label:'Contact'   },
+                  { href:'https://github.com/elishaoigara', label:'GitHub', external:true },
+                ]}
+              ].map((col,i) => (
+                <div key={i} className="col-sm-6 mb-4">
+                  <motion.h3 
+                    initial={{ opacity:0, y:10 }}
+                    whileInView={{ opacity:1, y:0 }}
+                    viewport={{ once:true }}
+                    transition={{ delay:.3+i*.1 }}
+                    style={{ 
+                      fontFamily:'Syne,sans-serif', 
+                      fontSize:20, 
+                      fontWeight:700, 
+                      color:'#e4ecf5', 
+                      marginBottom:20 
+                    }}
+                  >
+                    {col.title}
+                  </motion.h3>
+                  <motion.div 
+                    initial={{ opacity:0 }}
+                    whileInView={{ opacity:1 }}
+                    viewport={{ once:true }}
+                    transition={{ delay:.4+i*.1 }}
+                  >
+                    {col.links.map((l,j) => (
+                      <a 
+                        key={j} 
+                        href={l.href} 
+                        target={l.external ? "_blank" : undefined} 
+                        rel={l.external ? "noreferrer" : undefined}
+                        style={{
+                          display:'block',
+                          color:'#8fa3ba',
+                          fontSize:15,
+                          textDecoration:'none',
+                          marginBottom:12,
+                          transition:'color .2s',
+                          maxWidth:'max-content'
+                        }}
+                        onMouseEnter={e => e.target.style.color = '#00d4ff'}
+                        onMouseLeave={e => e.target.style.color = '#8fa3ba'}
+                      >
+                        {l.label}
+                      </a>
+                    ))}
+                  </motion.div>
+                </div>
+              ))}
             </div>
           </div>
-
-          {/* RIGHT */}
-          <div className="col-md-4 text-md-end">
-            <p style={{
-              color:C.t3,
-              fontSize:12,
-              margin:0
-            }}>
-              © {new Date().getFullYear()} Built with React + Framer Motion
-            </p>
-
-            <p style={{
-              color:C.t2,
-              fontSize:12,
-              marginTop:6
-            }}>
-              Designed as an AI-powered developer portfolio
-            </p>
-          </div>
-
         </div>
+        
+        {/* BOTTOM */}
+        <motion.div 
+          initial={{ opacity:0 }}
+          whileInView={{ opacity:1 }}
+          viewport={{ once:true }}
+          transition={{ delay:.6 }}
+          style={{ 
+            borderTop:'1px solid rgba(255,255,255,.06)', 
+            marginTop:60, 
+            paddingTop:30, 
+            display:'flex', 
+            flexWrap:'wrap',
+            justifyContent:'space-between',
+            alignItems:'center',
+            gap:20
+          }}
+        >
+          <div style={{ color:'#4d6478', fontSize:14, fontFamily:'JetBrains Mono,monospace' }}>
+            © {new Date().getFullYear()} Elisha Oigara. All rights reserved.
+          </div>
+          <div style={{ display:'flex', gap:24, flexWrap:'wrap' }}>
+            <a href="#" style={{ color:'#4d6478', fontSize:14, textDecoration:'none', transition:'color .2s' }}
+              onMouseEnter={e => e.target.style.color = '#00d4ff'}
+              onMouseLeave={e => e.target.style.color = '#4d6478'}>
+              Privacy Policy
+            </a>
+            <a href="#" style={{ color:'#4d6478', fontSize:14, textDecoration:'none', transition:'color .2s' }}
+              onMouseEnter={e => e.target.style.color = '#00d4ff'}
+              onMouseLeave={e => e.target.style.color = '#4d6478'}>
+              Terms of Service
+            </a>
+          </div>
+        </motion.div>
       </div>
     </footer>
   );
 }
-
-export default Footer;

@@ -36,25 +36,25 @@ export default function Hero() {
             <motion.div initial={{opacity:0,y:14}} animate={{opacity:1,y:0}} transition={{duration:.55}}
               style={{display:'flex',alignItems:'center',gap:10,marginBottom:28}}>
               <span style={{width:9,height:9,borderRadius:'50%',background:'#00ff94',boxShadow:'0 0 0 3px rgba(0,255,148,.22)',flexShrink:0,display:'inline-block'}}/>
-              <span style={{fontFamily:'JetBrains Mono,monospace',fontSize:12,color:'#00ff94',letterSpacing:'.16em',textTransform:'uppercase'}}>
+              <span style={{fontFamily:'JetBrains Mono,monospace',fontSize:'clamp(10px, 2vw, 12px)',color:'#00ff94',letterSpacing:'.16em',textTransform:'uppercase'}}>
                 Available for Work · Nairobi, Kenya
               </span>
             </motion.div>
 
             <motion.h1 initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.65,delay:.1}}
-              style={{fontFamily:'Syne,sans-serif',fontSize:'clamp(52px,8vw,88px)',fontWeight:800,lineHeight:.93,marginBottom:18,letterSpacing:'-.025em'}}>
+              style={{fontFamily:'Syne,sans-serif',fontSize:'clamp(40px, 8vw, 88px)',fontWeight:800,lineHeight:.93,marginBottom:18,letterSpacing:'-.025em'}}>
               <span style={{color:'#e4ecf5',display:'block'}}>Elisha</span>
               <span style={{background:'linear-gradient(135deg,#00d4ff,#7b61ff)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',display:'block'}}>Oigara</span>
             </motion.h1>
 
             <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.3}} style={{marginBottom:20,minHeight:34}}>
-              <span style={{fontFamily:'Syne,sans-serif',fontSize:'clamp(17px,2.5vw,24px)',fontWeight:600,color:'#8fa3ba'}}>
+              <span style={{fontFamily:'Syne,sans-serif',fontSize:'clamp(16px, 2.5vw, 24px)',fontWeight:600,color:'#8fa3ba'}}>
                 <TypeAnimation sequence={['Full-Stack Developer',2500,'AI-Powered Engineer',2500,'React + Node.js Builder',2500,'Backend & Frontend Dev',2500]} wrapper="span" speed={55} repeat={Infinity}/>
               </span>
             </motion.div>
 
             <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.45}}
-              style={{color:'#8fa3ba',fontSize:15,lineHeight:1.82,maxWidth:500,marginBottom:36}}>
+              style={{color:'#8fa3ba',fontSize:'clamp(14px, 1.5vw, 15px)',lineHeight:1.82,maxWidth:500,marginBottom:36}}>
               I build complete web applications from pixel-perfect frontends to robust backends, leveraging AI tools{' '}
               <strong style={{color:'#e4ecf5'}}>every single day</strong> to ship faster and smarter. ALX Software Engineering graduate.
             </motion.p>
@@ -75,27 +75,27 @@ export default function Hero() {
                 </a>
               ))}
               <div style={{width:1,height:18,background:'rgba(255,255,255,.09)'}}/>
-              <span style={{fontFamily:'JetBrains Mono,monospace',fontSize:12,color:'#3a5268'}}>elishaoigara50@gmail.com</span>
+              <span style={{fontFamily:'JetBrains Mono,monospace',fontSize:'clamp(10px, 2vw, 12px)',color:'#3a5268'}}>elishaoigara50@gmail.com</span>
             </motion.div>
           </div>
 
           {/* RIGHT */}
           <div className="col-lg-5 d-flex justify-content-center justify-content-lg-end">
             <motion.div initial={{opacity:0,scale:.88}} animate={{opacity:1,scale:1}} transition={{duration:.82,delay:.22}}
-              style={{position:'relative',width:285,height:285}}>
+              style={{position:'relative',width:'min(285px, 70vw)',height:'min(285px, 70vw)'}}>
               <div style={{position:'absolute',inset:-4,borderRadius:'50%',background:'conic-gradient(from 0deg,#00d4ff,#7b61ff,#00ff94,#00d4ff)',animation:'spin-slow 8s linear infinite'}}>
                 <div style={{width:'100%',height:'100%',borderRadius:'50%',background:'#07090d'}}/>
               </div>
               <img src={profilePic} alt="Elisha Oigara" style={{position:'absolute',inset:4,width:'calc(100% - 8px)',height:'calc(100% - 8px)',borderRadius:'50%',objectFit:'cover',objectPosition:'center top',zIndex:1}}/>
               <motion.div animate={{y:[0,-5,0]}} transition={{duration:3,repeat:Infinity}}
-                style={{position:'absolute',bottom:-10,right:-28,background:'#0b0f17',border:'1px solid rgba(0,212,255,.3)',borderRadius:12,padding:'10px 16px',zIndex:3,boxShadow:'0 8px 28px rgba(0,0,0,.7)'}}>
-                <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,color:'#00d4ff',fontWeight:600,letterSpacing:'.1em'}}>AI-POWERED</div>
-                <div style={{fontFamily:'DM Sans,sans-serif',fontSize:13,color:'#e4ecf5',fontWeight:700,marginTop:2}}>Full-Stack Dev</div>
+                style={{position:'absolute',bottom:'-10px',right:'-28px',background:'#0b0f17',border:'1px solid rgba(0,212,255,.3)',borderRadius:12,padding:'10px 16px',zIndex:3,boxShadow:'0 8px 28px rgba(0,0,0,.7)'}}>
+                <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:'clamp(8px, 2vw, 10px)',color:'#00d4ff',fontWeight:600,letterSpacing:'.1em'}}>AI-POWERED</div>
+                <div style={{fontFamily:'DM Sans,sans-serif',fontSize:'clamp(10px, 2vw, 13px)',color:'#e4ecf5',fontWeight:700,marginTop:2}}>Full-Stack Dev</div>
               </motion.div>
               <motion.div animate={{y:[0,5,0]}} transition={{duration:3.5,repeat:Infinity,delay:.8}}
-                style={{position:'absolute',top:-10,left:-32,background:'#0b0f17',border:'1px solid rgba(0,255,148,.3)',borderRadius:12,padding:'10px 16px',zIndex:3,boxShadow:'0 8px 28px rgba(0,0,0,.7)'}}>
-                <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,color:'#00ff94',letterSpacing:'.1em'}}>GRADUATED 🎓</div>
-                <div style={{fontFamily:'DM Sans,sans-serif',fontSize:13,color:'#e4ecf5',fontWeight:700,marginTop:2}}>ALX SE · 2025</div>
+                style={{position:'absolute',top:'-10px',left:'-32px',background:'#0b0f17',border:'1px solid rgba(0,255,148,.3)',borderRadius:12,padding:'10px 16px',zIndex:3,boxShadow:'0 8px 28px rgba(0,0,0,.7)'}}>
+                <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:'clamp(8px, 2vw, 10px)',color:'#00ff94',letterSpacing:'.1em'}}>GRADUATED 🎓</div>
+                <div style={{fontFamily:'DM Sans,sans-serif',fontSize:'clamp(10px, 2vw, 13px)',color:'#e4ecf5',fontWeight:700,marginTop:2}}>ALX SE · 2025</div>
               </motion.div>
             </motion.div>
           </div>
@@ -103,11 +103,11 @@ export default function Hero() {
 
         {/* stats */}
         <motion.div initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:.95}}
-          style={{marginTop:80,display:'grid',gridTemplateColumns:'repeat(4,1fr)',borderTop:'1px solid rgba(255,255,255,.06)',borderBottom:'1px solid rgba(255,255,255,.06)'}}>
+          style={{marginTop:80,display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(150px, 1fr))',borderTop:'1px solid rgba(255,255,255,.06)',borderBottom:'1px solid rgba(255,255,255,.06)'}}>
           {STATS.map((s,i) => (
             <div key={i} style={{padding:'22px 16px',borderRight:i<3?'1px solid rgba(255,255,255,.06)':'none',textAlign:'center'}}>
               <div style={{fontFamily:'Syne,sans-serif',fontSize:'clamp(22px,3vw,36px)',fontWeight:800,background:'linear-gradient(135deg,#00d4ff,#7b61ff)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>{s.n}</div>
-              <div style={{fontFamily:'DM Sans,sans-serif',fontSize:11,color:'#4d6478',marginTop:4,textTransform:'uppercase',letterSpacing:'.08em'}}>{s.l}</div>
+              <div style={{fontFamily:'DM Sans,sans-serif',fontSize:'clamp(10px, 2vw, 11px)',color:'#4d6478',marginTop:4,textTransform:'uppercase',letterSpacing:'.08em'}}>{s.l}</div>
             </div>
           ))}
         </motion.div>

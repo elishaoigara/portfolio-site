@@ -62,30 +62,76 @@ export default function Navbar() {
         </div>
 
         {/* Hamburger */}
-        <button onClick={() => setOpen(!open)} className="d-lg-none"
-          style={{ background:'none', border:'none', cursor:'pointer', color:'#e4ecf5', fontSize:22 }}>
+        <button 
+          onClick={() => setOpen(!open)} 
+          className="d-lg-none"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          style={{ 
+            background:'none', 
+            border:'none', 
+            cursor:'pointer', 
+            color:'#e4ecf5', 
+            fontSize:22,
+            width: 40,
+            height: 40,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
           {open ? '✕' : '☰'}
         </button>
       </nav>
 
       {/* Mobile drawer */}
       {open && (
-        <div style={{
-          position:'fixed', inset:0, zIndex:9998,
-          background:'rgba(7,9,13,0.98)', backdropFilter:'blur(24px)',
-          display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:4,
-        }}>
+        <div 
+          style={{
+            position:'fixed', 
+            inset:0, 
+            zIndex:9998,
+            background:'rgba(7,9,13,0.98)', 
+            backdropFilter:'blur(24px)',
+            display:'flex', 
+            flexDirection:'column', 
+            alignItems:'center', 
+            justifyContent:'center', 
+            gap:4,
+            animation: 'fadeIn 0.3s ease-out'
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-menu-title"
+        >
+          <h2 id="mobile-menu-title" style={{ display: 'none' }}>Navigation Menu</h2>
           {NAV.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} style={{
-              fontFamily:"'Syne',sans-serif", fontSize:28, fontWeight:700,
-              color:'#e4ecf5', padding:'14px 48px', textDecoration:'none', transition:'color .2s',
-            }}
+            <a 
+              key={l.href} 
+              href={l.href} 
+              onClick={() => setOpen(false)} 
+              style={{
+                fontFamily:"'Syne',sans-serif", 
+                fontSize:28, 
+                fontWeight:700,
+                color:'#e4ecf5', 
+                padding:'18px 48px', 
+                textDecoration:'none', 
+                transition:'color .2s',
+                width: '100%',
+                textAlign: 'center'
+              }}
               onMouseEnter={e => e.target.style.color='#00d4ff'}
               onMouseLeave={e => e.target.style.color='#e4ecf5'}
             >{l.label}</a>
           ))}
         </div>
       )}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      `}</style>
     </>
   );
 }
