@@ -129,7 +129,7 @@ const projects = [
     outcome:
       'Production-ready POS covering the full retail floor workflow: sales, shifts, counters, staff, and multi-branch admin.',
     tech: ['Next.js', 'TypeScript', 'Supabase', 'shadcn/ui', 'Tailwind CSS'],
-    code: 'https://github.com/elishaoigara/ora-pos-manager-platform',
+    code: 'https://github.com/elishaoigara/9-pos-manager-platform',
     live: null,
   },
   // Add more projects here as needed
