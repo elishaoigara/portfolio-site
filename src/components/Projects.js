@@ -1,252 +1,198 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useMemo, useState } from 'react';
+import projects from '../projectsData';
 
-/* ================== COLORS ================== */
-const C = {
-  cyan:'#00d4ff',
-  purple:'#7b61ff',
-  green:'#00ff94',
-  t1:'#e4ecf5',
-  t2:'#8fa3ba',
-};
+const CATS = ['All', ...Array.from(new Set(projects.map(p => p.category)))];
 
-/* ================== DATA ================== */
-const PROJECTS = [
-  {
-    title:'ORA — Personal AI Operating System',
-    description:'AI-powered assistant with memory, automation, and integrations.',
-    tech:['React','FastAPI','Groq','ChromaDB'],
-    github:'https://github.com/elishaoigara/ORA',
-    demo:'https://ora-tan-three.vercel.app/',
-    category:'AI',
-    featured:true,
-    emoji:'🤖',
-    image:'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop'
-  },
-  {
-    title:'Market Mint — Smart Trading Platform',
-    description:'A sleek market dashboard for tracking assets and trends in real time.',
-    tech:['React','Vite','Chart.js','REST API'],
-    github:'https://github.com/elishaoigara/market-mint',
-    demo:'https://market-mint.vercel.app/',
-    category:'Frontend',
-    emoji:'📈',
-    accent:C.green,
-    image:'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&auto=format&fit=crop'
-  },
-  {
-    title:'FinLog – Expense Tracker',
-    description:'Track income, expenses, and budgets with analytics.',
-    tech:['React','Firebase','Chart.js'],
-    github:'https://github.com/elishaoigara/finlog',
-    demo:'https://finlog-three.vercel.app/',
-    category:'Full-Stack',
-    emoji:'💰',
-    accent:C.green,
-    image:'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1200&auto=format&fit=crop'
-  },
-  {
-    title:'SkyCast – Weather App',
-    description:'Real-time weather app with clean UI and API integration.',
-    tech:['React','API'],
-    github:'https://github.com/elishaoigara/SkyCast',
-    demo:'https://sky-cast-pied-one.vercel.app/',
-    category:'Frontend',
-    emoji:'🌤️',
-    accent:C.cyan,
-    image:'https://images.unsplash.com/photo-1501973801540-537f08ccae7b?q=80&w=1200&auto=format&fit=crop'
-  },
-];
-
-const FILTERS = ['All','AI','Full-Stack','Frontend'];
-
-/* ================== MAIN ================== */
 export default function Projects() {
   const [filter, setFilter] = useState('All');
-  const filtered = filter==='All'
-    ? PROJECTS
-    : PROJECTS.filter(p => p.category===filter);
+
+  const visible = useMemo(
+    () => (filter === 'All' ? projects : projects.filter(p => p.category === filter)),
+    [filter]
+  );
 
   return (
-    <section id="projects" style={{padding:'100px 0', background:'#0b0f17'}}>
+    <section id="projects" className="section">
       <div className="container">
+        <span className="eyebrow">Selected work</span>
+        <h2 className="section-title" data-aos="fade-up">
+          What I've <em>shipped</em>
+        </h2>
+        <p className="section-lede" data-aos="fade-up" data-aos-delay="60">
+          A few real builds, what problem each one solved, and where you can
+          try or read the code yourself.
+        </p>
 
-        {/* HEADER */}
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
-          <span className="section-label">{'// Projects'}</span>
-          <h2 className="section-title">
-            Things I&apos;ve<br/>
-            <span style={{
-              background:'linear-gradient(135deg,#00d4ff,#7b61ff)',
-              WebkitBackgroundClip:'text',
-              WebkitTextFillColor:'transparent'
-            }}>
-              Built
-            </span>
-          </h2>
-          <div className="section-divider"/>
-        </motion.div>
-
-        {/* FILTERS */}
-        <div style={{display:'flex',gap:10,margin:'40px 0',flexWrap:'wrap'}}>
-          {FILTERS.map(f => (
+        <div className="proj-filters" data-aos="fade-up" data-aos-delay="100">
+          {CATS.map(c => (
             <button
-              key={f}
-              onClick={()=>setFilter(f)}
-              style={{
-                padding:'8px 18px',
-                borderRadius:100,
-                cursor:'pointer',
-                fontSize:13,
-                border:`1px solid ${f===filter ? 'rgba(0,212,255,0.4)' : 'rgba(255,255,255,0.08)'}`,
-                background:f===filter
-                  ? 'linear-gradient(135deg,rgba(0,212,255,0.15),rgba(123,97,255,0.15))'
-                  : 'rgba(255,255,255,0.02)',
-                color:f===filter ? C.cyan : C.t2,
-                boxShadow:f===filter ? '0 0 20px rgba(0,212,255,0.2)' : 'none'
-              }}
+              key={c}
+              className={`proj-filter ${filter === c ? 'is-active' : ''}`}
+              onClick={() => setFilter(c)}
+              aria-pressed={filter === c}
             >
-              {f}
+              {c}
             </button>
           ))}
         </div>
 
-        {/* GRID */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={filter}
-            initial={{opacity:0,y:10}}
-            animate={{opacity:1,y:0}}
-            exit={{opacity:0,y:-10}}
-            className="row g-4"
-          >
-            {filtered.map((p,i)=>(
-              <div key={p.title} className={p.featured ? 'col-12' : 'col-md-6 col-lg-4'}>
-                {p.featured
-                  ? <FeaturedCard p={p}/>
-                  : <RegularCard p={p} i={i}/>
-                }
+        <div className="proj-list">
+          {visible.map((p, i) => (
+            <article
+              key={p.id}
+              className="proj-card"
+              data-aos="fade-up"
+              data-aos-delay={i * 70}
+            >
+              <div className="proj-card__head">
+                <div>
+                  <h3 className="proj-card__title">{p.title}</h3>
+                  <p className="proj-card__tagline">{p.tagline}</p>
+                </div>
+                <span className="proj-card__year">{p.year}</span>
               </div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
 
+              <p className="proj-card__problem">
+                <span className="hand-note" aria-hidden="true">the problem —</span>{' '}
+                {p.problem}
+              </p>
+
+              <p className="proj-card__desc">{p.description}</p>
+
+              <p className="proj-card__outcome">
+                <strong>Outcome:</strong> {p.outcome}
+              </p>
+
+              <div className="proj-card__tech">
+                {p.tech.map(t => (
+                  <span className="tag" key={t}>{t}</span>
+                ))}
+              </div>
+
+              <div className="proj-card__links">
+                <a
+                  href={p.code}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn--ghost"
+                >
+                  View code ↗
+                </a>
+                {p.live && (
+                  <a
+                    href={p.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn--primary"
+                  >
+                    Live demo ↗
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
+
+      <style>{`
+        .proj-filters {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-bottom: 44px;
+        }
+        .proj-filter {
+          font-family: var(--font-mono);
+          font-size: 13px;
+          padding: 8px 16px;
+          border-radius: 20px;
+          border: 1px solid var(--border);
+          background: transparent;
+          color: var(--muted);
+          cursor: pointer;
+          transition: all .18s ease;
+        }
+        .proj-filter:hover { border-color: var(--ink); color: var(--ink); }
+        .proj-filter.is-active {
+          background: var(--ink);
+          border-color: var(--ink);
+          color: var(--cream);
+        }
+
+        .proj-list {
+          display: flex;
+          flex-direction: column;
+          gap: 28px;
+        }
+
+        .proj-card {
+          border: 1px solid var(--border);
+          border-radius: 4px;
+          padding: 36px 40px;
+          background: var(--paper);
+          transition: border-color .2s ease, transform .2s ease;
+        }
+        .proj-card:hover { border-color: var(--terracotta); }
+
+        .proj-card__head {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 16px;
+          margin-bottom: 18px;
+        }
+        .proj-card__title {
+          font-size: 26px;
+          margin-bottom: 4px;
+        }
+        .proj-card__tagline {
+          color: var(--muted);
+          font-size: 15px;
+          margin: 0;
+        }
+        .proj-card__year {
+          font-family: var(--font-mono);
+          font-size: 13px;
+          color: var(--muted);
+          flex-shrink: 0;
+          padding-top: 4px;
+        }
+
+        .proj-card__problem {
+          font-size: 16px;
+          margin: 0 0 14px;
+        }
+        .proj-card__desc {
+          color: var(--ink);
+          font-size: 16px;
+          line-height: 1.7;
+          margin: 0 0 14px;
+          max-width: 640px;
+        }
+        .proj-card__outcome {
+          font-size: 15px;
+          color: var(--muted);
+          margin: 0 0 22px;
+        }
+        .proj-card__outcome strong { color: var(--ink); }
+
+        .proj-card__tech {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+          margin-bottom: 24px;
+        }
+
+        .proj-card__links {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        @media (max-width: 640px) {
+          .proj-card { padding: 26px 22px; }
+        }
+      `}</style>
     </section>
-  );
-}
-
-/* ================== FEATURED ================== */
-function FeaturedCard({p}) {
-  return (
-    <motion.div
-      initial={{opacity:0,y:20}}
-      whileInView={{opacity:1,y:0}}
-      viewport={{once:true}}
-      style={{
-        borderRadius:20,
-        overflow:'hidden',
-        border:'1px solid rgba(0,212,255,0.25)',
-        background:'linear-gradient(135deg,rgba(0,212,255,0.08),rgba(123,97,255,0.06),#0b0f17)',
-        boxShadow:'0 20px 60px rgba(0,0,0,0.6)'
-      }}
-    >
-
-      {/* IMAGE */}
-      <div style={{height:260,overflow:'hidden'}}>
-        <img src={p.image} alt={p.title} style={{width:'100%',height:'100%',objectFit:'cover'}}/>
-      </div>
-
-      <div style={{padding:30}}>
-        <h3 style={{
-          fontSize:26,
-          fontWeight:800,
-          marginBottom:12,
-          background:'linear-gradient(135deg,#00d4ff,#7b61ff)',
-          WebkitBackgroundClip:'text',
-          WebkitTextFillColor:'transparent'
-        }}>
-          {p.title}
-        </h3>
-
-        <p style={{color:C.t2,marginBottom:20,lineHeight:1.7}}>
-          {p.description}
-        </p>
-
-        <div style={{display:'flex',flexWrap:'wrap',gap:8,marginBottom:20}}>
-          {p.tech.map((t,i)=><span key={i} className="tag">{t}</span>)}
-        </div>
-
-        <div style={{display:'flex',gap:10}}>
-          <a href={p.github} target="_blank" rel="noreferrer" className="btn-outline-custom">
-            GitHub
-          </a>
-          <a href={p.demo} target="_blank" rel="noreferrer" className="btn-primary-custom">
-            Live Demo ↗
-          </a>
-        </div>
-      </div>
-
-    </motion.div>
-  );
-}
-
-/* ================== REGULAR ================== */
-function RegularCard({p,i}) {
- 
-
-  return (
-    <motion.div
-      initial={{opacity:0,y:20}}
-      whileInView={{opacity:1,y:0}}
-      viewport={{once:true}}
-      transition={{delay:i*0.08}}
-      whileHover={{y:-10, scale:1.02}}
-      style={{
-        borderRadius:20,
-        overflow:'hidden',
-        border:'1px solid rgba(255,255,255,0.06)',
-        background:'linear-gradient(180deg,#0f1520,#0b0f17)',
-      }}
-    >
-
-      {/* IMAGE */}
-      <div style={{height:180,overflow:'hidden'}}>
-        <motion.img
-          src={p.image}
-          alt={p.title}
-          style={{width:'100%',height:'100%',objectFit:'cover'}}
-          whileHover={{scale:1.08}}
-        />
-      </div>
-
-      <div style={{padding:20}}>
-
-        <div style={{fontSize:22,marginBottom:8}}>{p.emoji}</div>
-
-        <h3 style={{color:C.t1,fontSize:18,marginBottom:10}}>
-          {p.title}
-        </h3>
-
-        <p style={{color:C.t2,fontSize:13,lineHeight:1.6,marginBottom:16}}>
-          {p.description}
-        </p>
-
-        <div style={{display:'flex',flexWrap:'wrap',gap:6,marginBottom:16}}>
-          {p.tech.map((t,i)=><span key={i} className="tag">{t}</span>)}
-        </div>
-
-        <div style={{display:'flex',gap:8}}>
-          <a href={p.github} target="_blank" rel="noreferrer" className="btn-outline-custom">
-            Code
-          </a>
-          <a href={p.demo} target="_blank" rel="noreferrer" className="btn-primary-custom">
-            Live ↗
-          </a>
-        </div>
-
-      </div>
-
-    </motion.div>
   );
 }

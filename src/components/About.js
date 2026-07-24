@@ -1,73 +1,100 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import profilePic from '../assets/elisha.jpeg';
 
-const HIGHLIGHTS = [
-  { icon:'🌍', label:'Location',   value:'Nairobi, Kenya' },
-  { icon:'⚡', label:'Focus',      value:'Full-Stack · AI Dev' },
-  { icon:'🎓', label:'Education',  value:'ALX SE · MKU · UoPeople' },
-  { icon:'🤖', label:'Superpower', value:'AI in every workflow' },
+const CAPABILITIES = [
+  'Frontend builds — React, responsive layout, interaction detail',
+  'Backend & APIs — Node.js/Express, Firebase, REST design',
+  'Databases — PostgreSQL, MongoDB, Firestore schema design',
+  'AI-assisted workflow — Claude Code, Cursor, Copilot in daily use',
 ];
 
 export default function About() {
   return (
-    <section id="about" style={{ padding:'100px 0', backgroundColor:'#0b0f17' }}>
-      <div className="container">
-        <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
-          <span className="section-label">{'// About Me'}</span>
-          <h2 className="section-title">Engineer. Builder.<br/>
-            <span style={{background:'linear-gradient(135deg,#00d4ff,#7b61ff)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>AI Practitioner.</span>
+    <section id="about" className="section section--paper">
+      <div className="container about__grid">
+        <div className="about__photo">
+          <img src={profilePic} alt="Elisha Oigara" />
+        </div>
+
+        <div>
+          <span className="eyebrow">About</span>
+          <h2 className="section-title" data-aos="fade-up">
+            From <em>database</em> to<br />deployed interface.
           </h2>
-          <div className="section-divider"/>
-        </motion.div>
 
-        <div className="row align-items-center g-5">
-          <div className="col-lg-4 d-flex justify-content-center">
-            <motion.div initial={{opacity:0,x:-22}} whileInView={{opacity:1,x:0}} viewport={{once:true}}
-              style={{position:'relative',width:'100%',maxWidth:300}}>
-              <div style={{position:'absolute',inset:-3,borderRadius:20,background:'conic-gradient(from 0deg,#00d4ff,#7b61ff,#00ff94,#00d4ff)',animation:'spin-slow 8s linear infinite'}}/>
-              <img src={profilePic} alt="Elisha" style={{width:'100%',borderRadius:18,position:'relative',zIndex:1,objectFit:'cover',aspectRatio:'1',display:'block'}}/>
-              <motion.div animate={{y:[0,-5,0]}} transition={{duration:3,repeat:Infinity}}
-                style={{position:'absolute',bottom:-14,right:-16,background:'#0b0f17',border:'1px solid rgba(0,212,255,.3)',borderRadius:12,padding:'10px 16px',zIndex:3,boxShadow:'0 8px 24px rgba(0,0,0,.6)'}}>
-                <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,color:'#00d4ff',letterSpacing:'.1em'}}>ALX SE</div>
-                <div style={{fontFamily:'DM Sans,sans-serif',fontSize:14,color:'#e4ecf5',fontWeight:700}}>Graduate '25</div>
-              </motion.div>
-            </motion.div>
-          </div>
+          <p className="about__p" data-aos="fade-up" data-aos-delay="60">
+            I'm Lambert Elisha Oigara, a full-stack software engineer based in
+            Nairobi, Kenya. I like owning a project end to end — designing the
+            data model, building the API, then making the interface feel right
+            to actually use.
+          </p>
+          <p className="about__p" data-aos="fade-up" data-aos-delay="100">
+            AI tools are part of how I work, not a shortcut around learning —
+            I use Claude Code, Cursor, and GitHub Copilot daily to move faster
+            through boilerplate so I can spend more time on architecture and
+            edge cases.
+          </p>
+          <p className="about__p" data-aos="fade-up" data-aos-delay="140">
+            Currently studying Computer Science at the University of the
+            People and Business Information Technology at Mount Kenya
+            University, alongside building.
+          </p>
 
-          <div className="col-lg-8">
-            <motion.div initial={{opacity:0,x:22}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{delay:.1}}>
-              <p style={{color:'#8fa3ba',fontSize:15,lineHeight:1.88,marginBottom:16}}>
-                I'm <strong style={{color:'#e4ecf5'}}>Lambert Elisha Oigara</strong> — a full-stack software engineer based in Nairobi. I build complete web applications from database design to polished UIs.
-              </p>
-              <p style={{color:'#8fa3ba',fontSize:15,lineHeight:1.88,marginBottom:16}}>
-                I integrate <strong style={{color:'#00d4ff'}}>AI tools into every stage of development</strong> — using Claude Code, Cursor, GitHub Copilot, and others daily to ship faster.
-              </p>
-              <p style={{color:'#8fa3ba',fontSize:15,lineHeight:1.88,marginBottom:32}}>
-                Currently studying <strong style={{color:'#e4ecf5'}}>Business IT at Mount Kenya University</strong> and <strong style={{color:'#e4ecf5'}}>Computer Science at University of the People</strong>.
-              </p>
+          <ul className="about__caps" data-aos="fade-up" data-aos-delay="180">
+            {CAPABILITIES.map(c => <li key={c}>{c}</li>)}
+          </ul>
 
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12,marginBottom:32}}>
-                {HIGHLIGHTS.map((h,i) => (
-                  <div key={i} style={{padding:'14px 16px',borderRadius:12,background:'#0f1520',border:'1px solid rgba(255,255,255,0.08)'}}>
-                    <div style={{fontSize:18,marginBottom:5}}>{h.icon}</div>
-                    <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,color:'#4d6478',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:3}}>{h.label}</div>
-                    <div style={{fontSize:13,fontWeight:600,color:'#e4ecf5'}}>{h.value}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
-                <a href="#contact" className="btn-primary-custom">Get in Touch</a>
-                <a href="https://github.com/elishaoigara" target="_blank" rel="noreferrer" className="btn-outline-custom">
-                  <i className="fab fa-github"/> GitHub
-                </a>
-              </div>
-            </motion.div>
+          <div className="about__ctas" data-aos="fade-up" data-aos-delay="220">
+            <a href="#contact" className="btn btn--primary">Get in touch</a>
+            <a href="https://github.com/elishaoigara" target="_blank" rel="noreferrer" className="btn btn--ghost">
+              GitHub ↗
+            </a>
           </div>
         </div>
       </div>
-      <style>{`@keyframes spin-slow{to{transform:rotate(360deg)}}`}</style>
+
+      <style>{`
+        .about__grid {
+          display: grid;
+          grid-template-columns: 0.75fr 1.25fr;
+          gap: 56px;
+          align-items: start;
+        }
+        .about__photo img {
+          width: 100%;
+          aspect-ratio: 3/4;
+          object-fit: cover;
+          object-position: top center;
+          border-radius: 4px;
+          filter: sepia(0.18) contrast(1.02);
+          border: 1px solid var(--border);
+        }
+        .about__p {
+          font-size: 17px;
+          line-height: 1.75;
+          margin: 0 0 16px;
+          max-width: 560px;
+        }
+        .about__caps {
+          list-style: none;
+          padding: 0;
+          margin: 24px 0 32px;
+          border-top: 1px solid var(--border-soft);
+        }
+        .about__caps li {
+          font-family: var(--font-mono);
+          font-size: 14px;
+          color: var(--muted);
+          padding: 12px 0;
+          border-bottom: 1px solid var(--border-soft);
+        }
+        .about__ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        @media (max-width: 800px) {
+          .about__grid { grid-template-columns: 1fr; gap: 32px; }
+          .about__photo img { max-width: 220px; }
+        }
+      `}</style>
     </section>
   );
 }
