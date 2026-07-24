@@ -4,14 +4,12 @@ const ITEMS = [
   {
     institution: 'University of the People',
     degree: 'B.Sc. Computer Science',
-    period: '2024 – Dec 2027',
     status: 'In progress',
     desc: 'Online, US-accredited. Algorithms, data structures, software engineering, operating systems, databases, AI fundamentals.',
   },
   {
     institution: 'Mount Kenya University',
     degree: 'B.Sc. Business Information Technology',
-    period: '2024 – Aug 2028',
     status: 'In progress',
     desc: 'Business strategy paired with software systems — project management, enterprise systems, business analysis.',
   },
@@ -45,7 +43,7 @@ export default function Education() {
                 </span>
               </div>
               <p className="edu__degree">{item.degree}</p>
-              <p className="edu__period">{item.period}</p>
+              {item.period && <p className="edu__period">{item.period}</p>}
               <p className="edu__desc">{item.desc}</p>
               {item.score && <p className="edu__score">Score: {item.score}</p>}
               {item.certUrl && (
