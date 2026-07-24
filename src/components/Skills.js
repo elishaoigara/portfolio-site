@@ -6,7 +6,8 @@ const CATS = {
     ['Cursor', 'AI-native IDE with codebase awareness'],
     ['GitHub Copilot', 'Inline suggestions & agent workflows'],
     ['ChatGPT / GPT-5', 'Architecture & debugging'],
-    ['Perplexity AI', 'Research & knowledge retrieval'],
+    ['DeepSeek', 'Cost-efficient reasoning & code generation'],
+    ['Kimi K2', 'Long-context analysis & agentic tasks'],
   ],
   Frontend: [
     ['React.js', 'SPA, hooks, state management'],
@@ -42,8 +43,9 @@ export default function Skills() {
           What I <em>reach for</em>
         </h2>
         <p className="section-lede" data-aos="fade-up" data-aos-delay="60">
-          AI tools sit at the center of how I build — the rest is a fairly
-          standard modern web stack.
+          I build with a full stable of AI models — not just one — picking
+          whichever is sharpest for the job, on top of a fairly standard
+          modern web stack.
         </p>
 
         <div className="skills__tabs" data-aos="fade-up" data-aos-delay="100">
