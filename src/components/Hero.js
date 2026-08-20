@@ -53,7 +53,7 @@ export default function Hero() {
             className="hero__ctas"
           >
             <a href="#projects" className="btn btn--primary">View my work</a>
-            <a href="/resume.pdf" target="_blank" rel="noreferrer" className="btn btn--ghost">Download résumé</a>
+            <a href="#contact" className="btn btn--ghost">Request my résumé</a>
           </motion.div>
 
           <motion.div

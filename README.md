@@ -1,83 +1,54 @@
-UpcomingPayments Component – FinLog
-This component is part of the FinLog web application, designed to track and manage upcoming payment reminders in a clean, modern, and responsive way.
+# Elisha Oigara - Portfolio Site
 
-✨ Features
-Add new upcoming payments with:
+This repository contains the source code for my personal portfolio website. It showcases my projects, skills, and experience as a Full-Stack Software Engineer.
 
-Payment title
+## Tech Stack
 
-Amount in Kenyan Shillings (Ksh)
+*   **Frontend:** React.js
+*   **Styling:** Custom CSS with CSS Variables
+*   **Animations:** Framer Motion, AOS (Animate On Scroll)
+*   **Form Handling:** EmailJS
 
-Due date
+## Getting Started
 
-Optional notes
+To run this project locally, follow these steps:
 
-Display upcoming payments in a responsive, animated card layout.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/elishaoigara/portfolio-site.git
+    cd portfolio-site
+    ```
 
-Smooth entry animations using Framer Motion.
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-Built with React.js, Bootstrap 5, and Framer Motion.
+3.  **Environment Variables:**
+    To enable the contact form, you will need to set up an EmailJS account and provide the following environment variables. Create a `.env` file in the root directory:
+    ```env
+    REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+    REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
+    REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+    ```
+    *Note: The contact form will gracefully fall back to a direct `mailto:` link if these variables are not present.*
 
-📁 File Location
-bash
-Copy
-Edit
-/src/components/UpcomingPayments.js
-🛠️ Technologies Used
-React.js
+4.  **Start the development server:**
+    ```bash
+    npm start
+    ```
+    The application will be available at `http://localhost:3000`.
 
-Bootstrap 5
+## Deployment
 
-Framer Motion
+This project is configured as a standard Create React App. To build the project for production:
 
-✅ How to Use
-Ensure your project has the following dependencies installed:
+```bash
+npm run build
+```
 
-bash
-Copy
-Edit
-npm install framer-motion bootstrap
-Import and use the component in your parent dashboard or page:
+The output will be generated in the `build/` directory, ready to be deployed to platforms like Vercel, Netlify, or GitHub Pages.
 
-jsx
-Copy
-Edit
-import UpcomingPayments from './components/UpcomingPayments';
-Provide props:
+## Author
 
-upcomingPayments (array)
-
-onAdd (function to handle adding a new payment)
-
-Example Usage:
-
-jsx
-Copy
-Edit
-const [upcomingPayments, setUpcomingPayments] = useState([]);
-
-const handleAddPayment = (payment) => {
-  setUpcomingPayments([...upcomingPayments, payment]);
-};
-
-<UpcomingPayments
-  upcomingPayments={upcomingPayments}
-  onAdd={handleAddPayment}
-/>
-🎨 Styling Notes
-Payment cards are styled with Bootstrap 5 and Framer Motion animations.
-
-Rounded corners, subtle shadows, and responsive grid layout included.
-
-📸 Screenshots
-Desktop View	Mobile View
-
-⚙️ Customization Suggestions
-Integrate with a backend or local storage for persistent payment reminders.
-
-Add delete or edit functionality for each payment card.
-
-Style cards with color indicators based on due date urgency.
-
-🧑‍💻 Author
-Developed by Elisha Oigara
+Developed by Elisha Oigara.
