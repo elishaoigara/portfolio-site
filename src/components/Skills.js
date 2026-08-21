@@ -48,19 +48,43 @@ export default function Skills() {
           modern web stack.
         </p>
 
-        <div className="skills__tabs" data-aos="fade-up" data-aos-delay="100">
-          {Object.keys(CATS).map(t => (
-            <button
-              key={t}
-              className={`skills__tab ${t === tab ? 'is-active' : ''}`}
-              onClick={() => setTab(t)}
-            >
-              {t}
-            </button>
-          ))}
+        <div
+          className="skills__tabs"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          role="tablist"
+          aria-label="Skills categories"
+        >
+          {Object.keys(CATS).map(t => {
+            const tabId = `skills-tab-${t.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+            const panelId = `${tabId}-panel`;
+            const isActive = t === tab;
+
+            return (
+              <button
+                key={t}
+                id={tabId}
+                className={`skills__tab ${isActive ? 'is-active' : ''}`}
+                onClick={() => setTab(t)}
+                role="tab"
+                type="button"
+                aria-selected={isActive}
+                aria-controls={panelId}
+                tabIndex={isActive ? 0 : -1}
+              >
+                {t}
+              </button>
+            );
+          })}
         </div>
 
-        <div className="skills__grid">
+        <div
+          className="skills__grid"
+          id={`skills-tab-${tab.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-panel`}
+          role="tabpanel"
+          aria-labelledby={`skills-tab-${tab.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+          tabIndex="0"
+        >
           {CATS[tab].map(([name, desc]) => (
             <div className="skills__item" key={name}>
               <div className="skills__item-name">{name}</div>
