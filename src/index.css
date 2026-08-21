@@ -7,7 +7,7 @@
   --paper: #faf7f0;        /* alt-section background */
   --ink: #1a1815;          /* primary text */
   --muted: #6b6459;        /* secondary text */
-  --terracotta: #c1502e;   /* primary accent — links, CTAs, tags */
+  --terracotta: #a84424;   /* primary accent — WCAG AA contrast on cream */
   --forest: #3d5a45;       /* secondary accent — used sparingly */
   --border: rgba(26, 24, 21, 0.14);
   --border-soft: rgba(26, 24, 21, 0.08);
