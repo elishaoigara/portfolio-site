@@ -5,15 +5,14 @@ test.describe('Portfolio Core Interactions', () => {
     await page.goto('/');
   });
 
-  test('should load the hero section and verify CTA navigation', async ({ page }) => {
+  test('should load the hero section and verify résumé request CTA', async ({ page }) => {
     await expect(page.locator('h1')).toContainText('Elisha Oigara builds');
     
-    const requestResumeBtn = page.getByRole('link', { name: /request my résumé/i });
-    await expect(requestResumeBtn).toBeVisible();
-    await expect(requestResumeBtn).toHaveAttribute('href', '#contact');
-    
-    // Test navigation
-    await requestResumeBtn.click();
+    const resumeBtn = page.getByRole('link', { name: /request my résumé/i });
+    await expect(resumeBtn).toBeVisible();
+    await expect(resumeBtn).toHaveAttribute('href', '#contact');
+
+    await resumeBtn.click();
     await expect(page).toHaveURL(/.*#contact/);
   });
 
@@ -59,5 +58,21 @@ test.describe('Portfolio Core Interactions', () => {
     await expect(page.locator('input[name="email"]')).toBeVisible();
     await expect(page.locator('textarea[name="message"]')).toBeVisible();
     await expect(page.getByRole('button', { name: /send message/i })).toBeVisible();
+  });
+
+  test('should expose social metadata and privacy-friendly analytics', async ({ page }) => {
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /Elisha Oigara/);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /android-chrome-512x512\.png/);
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+    await expect(page.locator('script[src="/_vercel/insights/script.js"]')).toHaveAttribute('defer', '');
+  });
+
+  test('should expose the Skills tabs with keyboard-accessible semantics', async ({ page }) => {
+    const tablist = page.getByRole('tablist', { name: /skills categories/i });
+    await expect(tablist).toBeVisible();
+    const activeTab = page.getByRole('tab', { name: 'AI & Tools' });
+    await activeTab.focus();
+    await activeTab.press('ArrowRight');
+    await expect(page.getByRole('tab', { name: 'Frontend' })).toHaveAttribute('aria-selected', 'true');
   });
 });

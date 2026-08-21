@@ -29,6 +29,18 @@ describe('Skills component', () => {
     expect(screen.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', frontendTab.id);
     expect(screen.getByText('React.js')).toBeInTheDocument();
   });
+
+  test('supports arrow-key navigation between tabs', async () => {
+    render(<Skills />);
+
+    const activeTab = screen.getByRole('tab', { name: 'AI & Tools' });
+    userEvent.type(activeTab, '{ArrowRight}');
+    await new Promise(resolve => window.requestAnimationFrame(resolve));
+
+    const frontendTab = screen.getByRole('tab', { name: 'Frontend' });
+    expect(frontendTab).toHaveAttribute('aria-selected', 'true');
+    expect(frontendTab).toHaveFocus();
+  });
 });
 
 jest.mock('aos', () => ({

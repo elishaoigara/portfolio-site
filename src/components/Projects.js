@@ -23,7 +23,7 @@ export default function Projects() {
           try or read the code yourself.
         </p>
 
-        <div className="proj-filters" data-aos="fade-up" data-aos-delay="100">
+        <div className="proj-filters" data-aos="fade-up" data-aos-delay="100" role="group" aria-label="Filter projects by category">
           {CATS.map(c => (
             <button
               key={c}
@@ -36,7 +36,7 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className="proj-list">
+        <div className="proj-list" role="feed" aria-label="Project list">
           {visible.map((p, i) => (
             <article
               key={p.id}

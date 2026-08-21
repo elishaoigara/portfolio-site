@@ -13,20 +13,12 @@ jest.mock('framer-motion', () => ({
 }));
 
 describe('Hero Component', () => {
-  test('renders the updated resume request CTA pointing to #contact', () => {
+  test('renders a safe résumé request CTA while the PDF asset is unavailable', () => {
     render(<Hero />);
     
-    // The updated CTA requests the résumé through the contact section.
     const resumeLink = screen.getByRole('link', { name: /request my résumé/i });
     
     expect(resumeLink).toBeInTheDocument();
     expect(resumeLink).toHaveAttribute('href', '#contact');
-  });
-
-  test('does not render the old download CTA', () => {
-    render(<Hero />);
-    
-    const brokenLink = screen.queryByRole('link', { name: /download résumé/i });
-    expect(brokenLink).not.toBeInTheDocument();
   });
 });

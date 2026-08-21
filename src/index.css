@@ -66,9 +66,10 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--terracotta);
+  outline: 3px solid var(--terracotta);
   outline-offset: 3px;
   border-radius: 2px;
+  box-shadow: 0 0 0 5px var(--cream);
 }
 
 .container {
@@ -152,6 +153,37 @@ textarea:focus-visible {
   border: 1px solid var(--border);
   border-radius: 20px;
   color: var(--muted);
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --muted: #4d473f;
+    --border: rgba(26, 24, 21, 0.45);
+    --border-soft: rgba(26, 24, 21, 0.25);
+  }
+
+  .btn,
+  .skills__tab,
+  .proj-filter {
+    border-width: 2px;
+  }
+}
+
+@media (forced-colors: active) {
+  *:focus-visible {
+    outline: 3px solid CanvasText;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px Canvas;
+  }
+
+  .btn,
+  .skills__tab,
+  .proj-filter,
+  .tag {
+    border-color: ButtonText;
+    color: ButtonText;
+    forced-color-adjust: none;
+  }
 }
 
 ::selection { background: var(--terracotta); color: var(--cream); }

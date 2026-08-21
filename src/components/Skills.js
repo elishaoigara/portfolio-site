@@ -32,8 +32,28 @@ const CATS = {
   ],
 };
 
+const tabs = Object.keys(CATS);
+const getTabId = tab => `skills-tab-${tab.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+
 export default function Skills() {
   const [tab, setTab] = useState('AI & Tools');
+
+  const handleTabKeyDown = (event, currentTab) => {
+    const currentIndex = tabs.indexOf(currentTab);
+    let nextIndex = currentIndex;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (currentIndex + 1) % tabs.length;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    if (event.key === 'Home') nextIndex = 0;
+    if (event.key === 'End') nextIndex = tabs.length - 1;
+
+    if (nextIndex !== currentIndex) {
+      event.preventDefault();
+      const nextTab = tabs[nextIndex];
+      setTab(nextTab);
+      window.requestAnimationFrame(() => document.getElementById(getTabId(nextTab))?.focus());
+    }
+  };
 
   return (
     <section id="skills" className="section">
@@ -56,7 +76,7 @@ export default function Skills() {
           aria-label="Skills categories"
         >
           {Object.keys(CATS).map(t => {
-            const tabId = `skills-tab-${t.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+            const tabId = getTabId(t);
             const panelId = `${tabId}-panel`;
             const isActive = t === tab;
 
@@ -66,6 +86,7 @@ export default function Skills() {
                 id={tabId}
                 className={`skills__tab ${isActive ? 'is-active' : ''}`}
                 onClick={() => setTab(t)}
+                onKeyDown={event => handleTabKeyDown(event, t)}
                 role="tab"
                 type="button"
                 aria-selected={isActive}
@@ -80,9 +101,9 @@ export default function Skills() {
 
         <div
           className="skills__grid"
-          id={`skills-tab-${tab.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-panel`}
+          id={`${getTabId(tab)}-panel`}
           role="tabpanel"
-          aria-labelledby={`skills-tab-${tab.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+          aria-labelledby={getTabId(tab)}
           tabIndex="0"
         >
           {CATS[tab].map(([name, desc]) => (

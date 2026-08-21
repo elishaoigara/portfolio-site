@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const NAV = [
   { href: '#about', label: 'About' },
@@ -11,12 +11,24 @@ const NAV = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const firstDrawerLinkRef = useRef(null);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', fn);
     return () => window.removeEventListener('scroll', fn);
   }, []);
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    firstDrawerLinkRef.current?.focus();
+    const closeOnEscape = event => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [open]);
 
   return (
     <>
@@ -35,15 +47,22 @@ export default function Navbar() {
           className="nav__burger"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="mobile-navigation"
         >
           {open ? '✕' : '☰'}
         </button>
       </nav>
 
       {open && (
-        <div className="nav__drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
-          {NAV.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="nav__drawer-link">
+        <div id="mobile-navigation" className="nav__drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+          {NAV.map((l, index) => (
+            <a
+              key={l.href}
+              href={l.href}
+              ref={index === 0 ? firstDrawerLinkRef : undefined}
+              onClick={() => setOpen(false)}
+              className="nav__drawer-link"
+            >
               {l.label}
             </a>
           ))}

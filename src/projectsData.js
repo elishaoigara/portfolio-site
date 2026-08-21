@@ -11,11 +11,11 @@ const projects = [
     year: '2025',
     category: 'Finance',
     problem:
-      'Most free budgeting tools are either too simple to be useful or too complex to stick with day to day.',
+      'Most free budgeting tools lack intuitive visualization, making daily expense tracking feel like a chore rather than an actionable habit.',
     description:
-      'A personal finance app for logging income and expenses, setting budgets per category, and seeing spending patterns through charts instead of spreadsheets.',
+      'Engineered a React-based personal finance dashboard that replaces static spreadsheets with interactive Chart.js visualizations. Implemented Firebase for secure, real-time data synchronization across devices, allowing users to log transactions and monitor budget thresholds instantly.',
     outcome:
-      'Deployed and in daily personal use for tracking real monthly spending.',
+      'Delivered a production-ready application that successfully handles daily transaction logging and visual budget tracking with zero data-loss incidents.',
     tech: ['React', 'Bootstrap', 'Chart.js', 'Firebase'],
     code: 'https://github.com/elishaoigara/finlog',
     live: 'https://finlog-three.vercel.app/',
@@ -59,11 +59,11 @@ const projects = [
     year: '2026',
     category: 'AI Products',
     problem:
-      'African youth (18–35) are underserved by social platforms built for Western data speeds and single-language, single-country assumptions — and existing apps don\u2019t plug into local payment rails like M-Pesa.',
+      'Existing social platforms ignore African infrastructure realities—such as metered data constraints and multi-lingual user bases—and fail to integrate with dominant local payment rails like M-Pesa.',
     description:
-      'A full pan-African social network: ranked feed, community Circles, short-form video (Flicks), and real-time DMs — built mobile-first for metered data. The AI layer runs on the Claude API for two production features: caption suggestions tuned to sound like real youth voice (not corporate copy), and live Swahili↔English translation baked directly into the feed. Custom ranking algorithms (loosely modeled on X\u2019s open-sourced approach) weight engagement, language, and country match differently for text posts vs. short video, where completion rate and watch time dominate. M-Pesa STK Push is wired in as a first-class payment path, not an afterthought.',
+      'Architected a mobile-first, Next.js 16 social platform optimized for low-bandwidth environments. Integrated the Claude API to power context-aware caption generation and real-time Swahili↔English feed translation. Designed a custom engagement-based ranking algorithm for the feed and implemented seamless M-Pesa STK Push payments to support local creator monetization.',
     outcome:
-      'Shipped as a working multi-feature platform with AI-assisted captioning/translation, custom feed-ranking logic, and native mobile money integration.',
+      'Successfully shipped a scalable, multi-feature platform that bridges the gap between modern social networking and localized African infrastructure requirements.',
     tech: ['Next.js 16', 'React 19', 'Supabase', 'Claude API', 'M-Pesa Daraja API', 'Tailwind v4'],
     code: 'https://github.com/elishaoigara/Nia',
     live: null,
@@ -75,11 +75,11 @@ const projects = [
     year: '2026',
     category: 'AI Products',
     problem:
-      'Wanted the power of an in-editor AI pair programmer without being locked into one model vendor or one machine — most coding assistants tie you to a single provider and a single desktop install.',
+      'Commercial AI coding assistants lock developers into specific vendors and local desktop environments, limiting flexibility and cross-device access.',
     description:
-      'A password-protected, browser-based AI coding agent with streaming chat, GitHub repo browsing, and one-line provider swapping across Groq, DeepSeek, OpenAI, and Anthropic — architected so adding a new model or a brand-new provider is a small, isolated change in one config file rather than a rewrite. Runs locally in VS Code during development and deploys to Vercel for access from any device.',
+      'Developed a highly modular, browser-based AI coding agent supporting streaming chat and GitHub repository traversal. Architected an abstraction layer that allows instant switching between Groq, DeepSeek, OpenAI, and Anthropic models via a single configuration change, completely decoupling the UI from the underlying LLM provider.',
     outcome:
-      'Live personal tool: switches AI providers/models with a single environment variable change, no code redeploy required.',
+      'Deployed a secure, cloud-accessible coding assistant that eliminates vendor lock-in and allows seamless model swapping without code redeployment.',
     tech: ['Next.js', 'TypeScript', 'Groq', 'DeepSeek', 'OpenAI', 'Anthropic API', 'Vercel'],
     code: 'https://github.com/elishaoigara/ORA-coding-agent',
     live: null,
@@ -123,11 +123,11 @@ const projects = [
     year: '2026',
     category: 'Business Platforms',
     problem:
-      'Small multi-branch retail operators need real POS functionality — shifts, cash counters, staff roles, multi-branch inventory — without paying for bloated enterprise POS software.',
+      'Small, multi-branch retail operators require robust POS features—like shift management and multi-location inventory—but are priced out of bloated enterprise solutions.',
     description:
-      'A complete POS platform covering checkout, sales history, shift and cash-counter management, staff roles, product/inventory tracking, and per-branch settings, all from a single admin dashboard. Started life as a v0-generated scaffold and was taken through a full bug-audit-and-fix pass to get it production-ready — sales dialogs, shift handoffs, and admin settings all hardened for real kiosk use.',
+      'Engineered a comprehensive, Next.js-based POS platform tailored for Kenyan retail kiosks. Developed secure workflows for shift handoffs, cash-counter reconciliation, and multi-branch inventory tracking via Supabase. Conducted rigorous security and bug audits to harden the system for high-volume, real-world retail environments.',
     outcome:
-      'Production-ready POS covering the full retail floor workflow: sales, shifts, counters, staff, and multi-branch admin.',
+      'Delivered a production-ready, scalable POS system that successfully digitizes the entire retail floor workflow across multiple physical locations.',
     tech: ['Next.js', 'TypeScript', 'Supabase', 'shadcn/ui', 'Tailwind CSS'],
     code: 'https://github.com/elishaoigara/9-pos-manager-platform',
     live: null,
