@@ -1,6 +1,8 @@
-This favicon was generated using the following font:
+Elisha Oigara | Full-stack developer & AI product builder
+Nairobi, Kenya
 
-- Font Title: Farsan
-- Font Author: undefined
-- Font Source: https://fonts.gstatic.com/s/farsan/v23/VEMwRoJ0vY_zsyz62q-pxDX9rQ.ttf
-- Font License: undefined)
+I build AI tools, business platforms, and thoughtful web experiences.
+Selected work: ORA Coding Agent, ORA POS, Nia, Samaritan AI, CallCare BPO, and ORA Personal AI.
+
+GitHub: https://github.com/elishaoigara
+Contact: elishaoigara50@gmail.com
