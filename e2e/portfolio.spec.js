@@ -36,8 +36,8 @@ test("filters projects and restores all six", async ({ page }) => {
     .getByRole("button", { name: "Business platforms", exact: true })
     .click();
   await expect(page.locator(".project-card h3")).toHaveText([
-    "ORA POS",
     "CallCare BPO",
+    "ORA POS",
   ]);
   await page.getByRole("button", { name: /All work/ }).click();
   await expect(page.locator(".project-card")).toHaveCount(6);

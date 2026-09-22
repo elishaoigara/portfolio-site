@@ -39,13 +39,13 @@ export default function Hero() {
         <div className="hero-showcase">
           <div className="showcase-label">
             <span>IN FOCUS / 01</span>
-            <span>AI × SOFTWARE</span>
+            <span>DOMAIN · SEO · SUPPORT</span>
           </div>
-          <ProjectVisual type="agent" hero />
+          <ProjectVisual type="callcare" hero />
           <div className="showcase-caption">
             <div>
-              <strong>ORA Coding Agent</strong>
-              <span>AI assistance. Human control.</span>
+              <strong>CallCare BPO</strong>
+              <span>Website setup. SEO. Ongoing support.</span>
             </div>
             <a href="#projects" aria-label="Explore selected projects">
               ↗
