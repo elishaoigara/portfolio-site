@@ -93,15 +93,15 @@ const projects = [
     category: "Business platforms",
     tagline: "From website setup to SEO and ongoing care.",
     description:
-      "Purchased and configured the company’s website, carried out SEO, and continue to maintain it, alongside business pages and a practical recruitment workflow.",
+      "Purchased the callcare.com domain, configured the company’s website, carried out SEO, and continue to maintain it, alongside business pages and a practical recruitment workflow.",
     problem:
       "CallCare needed a professional website that helps people find the business, supports job applications, and stays useful and up to date after launch.",
     implementation:
-      "Handled the website purchase, setup, and configuration, and carried out SEO for the company. Built business pages and recruitment flows with application submission, CV validation, and recruiter access. I continue to maintain the website and resolve issues as they arise.",
+      "Purchased the callcare.com domain, handled website setup and configuration, and carried out SEO for the company. Built business pages and recruitment flows with application submission, CV validation, and recruiter access. I continue to maintain the website and resolve issues as they arise.",
     value:
       "Demonstrates end-to-end website delivery, SEO, recruitment workflow development, and ongoing technical support for a business.",
     scope:
-      "Client website with ongoing maintenance. Work includes website purchase and configuration, SEO, and recruitment features. Applicant information is never included in this portfolio.",
+      "Client website with ongoing maintenance. Work includes the callcare.com domain purchase, website configuration, SEO, and recruitment features. Applicant information is never included in this portfolio.",
     tech: ["React", "SEO", "Website configuration", "Ongoing maintenance"],
     code: "https://github.com/elishaoigara/callcare-bpo-website",
     live: "https://callcare-bpo-website.vercel.app",
