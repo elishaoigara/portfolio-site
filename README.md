@@ -1,54 +1,59 @@
-# Elisha Oigara - Portfolio Site
+# Elisha Oigara — Portfolio
 
-This repository contains the source code for my personal portfolio website. It showcases my projects, skills, and experience as a Full-Stack Software Engineer.
+A responsive React portfolio for a Nairobi-based full-stack developer and AI product builder. The site leads with six selected projects, useful capabilities, and clear ways to start a conversation.
 
-## Tech Stack
+## Run locally
 
-*   **Frontend:** React.js
-*   **Styling:** Custom CSS with CSS Variables
-*   **Animations:** Framer Motion, AOS (Animate On Scroll)
-*   **Form Handling:** EmailJS
+```sh
+npm ci
+npm start
+```
 
-## Getting Started
+## Quality checks
 
-To run this project locally, follow these steps:
+```sh
+CI=true npm test -- --watchAll=false --runInBand
+CI=true npm run build
+npx playwright install chromium
+npm run test:e2e
+```
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/elishaoigara/portfolio-site.git
-    cd portfolio-site
-    ```
+Playwright starts the development server automatically. Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` only when using an existing Chromium installation. Browser checks cover project filters, dialogs and focus restoration, private source boundaries, keyboard tabs, contact validation, mobile navigation, section links, overflow at 320/375/768/1440 pixels, and automated accessibility scans.
 
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
+## Contact
 
-3.  **Environment Variables:**
-    To enable the contact form, you will need to set up an EmailJS account and provide the following environment variables. Create a `.env` file in the root directory:
-    ```env
-    REACT_APP_EMAILJS_SERVICE_ID=your_service_id
-    REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
-    REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
-    ```
-    *Note: The contact form will gracefully fall back to a direct `mailto:` link if these variables are not present.*
+The existing contact email is `elishaoigara50@gmail.com`.
 
-4.  **Start the development server:**
-    ```bash
-    npm start
-    ```
-    The application will be available at `http://localhost:3000`.
+By default, the form validates the visitor's details and prepares a `mailto:` draft. It explicitly asks the visitor to send that draft in their email app; it does not claim delivery. A direct email link is always visible.
+
+To enable EmailJS delivery, configure these build-time environment variables:
+
+```env
+REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
+REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+The template receives `name`, `email`, and `message`. Configure your EmailJS allowed origins and provider anti-abuse settings. Verify real delivery on the deployed domain with a test you authorize. These checks do not send messages. Errors preserve the visitor's input.
+
+## Content maintenance
+
+- `src/projectsData.js`: project order, categories, copy, stack, source links, optional website links, and development scope.
+- `src/components/ProjectVisual.js`: original CSS/HTML product illustrations. They are labelled as illustrative previews, not screenshots or live customer data.
+- `src/index.css`: responsive design system, focus styling, reduced motion, and self-hosted fonts.
+- `public/index.html`: description, canonical URL, social sharing and Person structured data.
+- `public/social-card.png`, favicon and app icons: matching personal branding.
+
+Project selection was checked against current GitHub documentation and metadata on 22 September 2026. ORA Coding Agent, ORA POS, Nia, Samaritan AI, CallCare BPO, and ORA Personal AI demonstrate complementary capabilities. ORA and ORA POS source remains private. Their production status is qualified in the case studies. No adoption, revenue, client-results, or uptime figures are invented.
+
+Samaritan AI, Nia and CallCare website links were checked for an HTTP 200 response and matching page title. This does not establish that every deployed product workflow is production-ready. The other projects use source or enquiry links rather than unverified live demos.
+
+This portfolio intentionally curates high-value work instead of fetching every repository at runtime. Updating GitHub alone does not change the project list. Revisit the content file when adding a project or changing its status.
+
+The old skills inventory, older exercises and self-referential portfolio card were replaced with current, capability-focused content. Source review also corrected an outdated POS URL and unsupported architecture/payment/production claims.
 
 ## Deployment
 
-This project is configured as a standard Create React App. To build the project for production:
+Run `npm run build` and deploy `build/` using the existing Create React App hosting configuration. The canonical URL is currently `https://portfolio-site-jade-phi.vercel.app/`; update `public/index.html`, `public/sitemap.xml`, and `public/robots.txt` together if the domain changes.
 
-```bash
-npm run build
-```
-
-The output will be generated in the `build/` directory, ready to be deployed to platforms like Vercel, Netlify, or GitHub Pages.
-
-## Author
-
-Developed by Elisha Oigara.
+Fonts are self-hosted. Their SIL Open Font Licenses are in `public/fonts/`. The site does not fetch Google Fonts or run an analytics script.

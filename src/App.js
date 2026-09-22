@@ -1,32 +1,29 @@
-import React, { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Education from './components/Education';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React from "react";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import Services from "./components/Services";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
-function App() {
-  useEffect(() => {
-    AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic', offset: 60 });
-  }, []);
+export default function App() {
   return (
     <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <Navbar />
-      <main>
+      <main id="main" tabIndex={-1}>
         <Hero />
+        <Projects />
+        <Services />
         <About />
         <Skills />
-        <Projects />
-        <Education />
         <Contact />
       </main>
       <Footer />
     </>
   );
 }
-export default App;

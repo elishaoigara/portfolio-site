@@ -1,198 +1,190 @@
-import React, { useMemo, useState } from 'react';
-import projects from '../projectsData';
-
-const CATS = ['All', ...Array.from(new Set(projects.map(p => p.category)))];
-
+import React, { useState, useRef, useEffect } from "react";
+import projects from "../projectsData";
+import ProjectVisual from "./ProjectVisual";
+const categories = ["All work", ...new Set(projects.map((p) => p.category))];
 export default function Projects() {
-  const [filter, setFilter] = useState('All');
-
-  const visible = useMemo(
-    () => (filter === 'All' ? projects : projects.filter(p => p.category === filter)),
-    [filter]
+  const [filter, setFilter] = useState("All work");
+  const [selected, setSelected] = useState(null);
+  const dialog = useRef(null);
+  const trigger = useRef(null);
+  useEffect(() => {
+    if (!selected) return;
+    dialog.current.showModal();
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+      trigger.current?.focus({ preventScroll: true });
+    };
+  }, [selected]);
+  const close = () => {
+    dialog.current?.close();
+    setSelected(null);
+  };
+  const shown = projects.filter(
+    (p) => filter === "All work" || filter === p.category,
   );
-
   return (
-    <section id="projects" className="section">
-      <div className="container">
-        <span className="eyebrow">Selected work</span>
-        <h2 className="section-title" data-aos="fade-up">
-          What I've <em>shipped</em>
-        </h2>
-        <p className="section-lede" data-aos="fade-up" data-aos-delay="60">
-          A few real builds, what problem each one solved, and where you can
-          try or read the code yourself.
+    <section className="section container work-section" id="projects">
+      <div className="section-heading">
+        <div>
+          <p className="eyebrow">01 / SELECTED WORK</p>
+          <h2>
+            Built to solve.
+            <br />
+            <span className="muted-heading">Designed to be used.</span>
+          </h2>
+        </div>
+        <p>
+          Six projects. Different challenges.
+          <br />A shared focus on making technology useful.
         </p>
-
-        <div className="proj-filters" data-aos="fade-up" data-aos-delay="100" role="group" aria-label="Filter projects by category">
-          {CATS.map(c => (
+      </div>
+      <div className="filter-row">
+        <div className="filters" role="group" aria-label="Filter projects">
+          {categories.map((c) => (
             <button
               key={c}
-              className={`proj-filter ${filter === c ? 'is-active' : ''}`}
+              className={`proj-filter ${c === filter ? "is-active" : ""}`}
+              aria-pressed={c === filter}
               onClick={() => setFilter(c)}
-              aria-pressed={filter === c}
             >
               {c}
+              {c === "All work" && <span>06</span>}
             </button>
           ))}
         </div>
-
-        <div className="proj-list" role="feed" aria-label="Project list">
-          {visible.map((p, i) => (
-            <article
-              key={p.id}
-              className="proj-card"
-              data-aos="fade-up"
-              data-aos-delay={i * 70}
+        <span className="work-count" aria-live="polite">
+          {String(shown.length).padStart(2, "0")} PROJECTS
+        </span>
+      </div>
+      <div className="projects-grid">
+        {shown.map((p) => (
+          <article
+            className={`project-card project-${p.visual}`}
+            key={p.id}
+            id={`project-${p.id}`}
+          >
+            <button
+              className="project-preview"
+              onClick={(e) => {
+                trigger.current = e.currentTarget;
+                setSelected(p);
+              }}
+              aria-label={`Read ${p.title} case study`}
             >
-              <div className="proj-card__head">
-                <div>
-                  <h3 className="proj-card__title">{p.title}</h3>
-                  <p className="proj-card__tagline">{p.tagline}</p>
-                </div>
-                <span className="proj-card__year">{p.year}</span>
-              </div>
-
-              <p className="proj-card__problem">
-                <span className="hand-note" aria-hidden="true">the problem —</span>{' '}
-                {p.problem}
-              </p>
-
-              <p className="proj-card__desc">{p.description}</p>
-
-              <p className="proj-card__outcome">
-                <strong>Outcome:</strong> {p.outcome}
-              </p>
-
-              <div className="proj-card__tech">
-                {p.tech.map(t => (
-                  <span className="tag" key={t}>{t}</span>
-                ))}
-              </div>
-
-              <div className="proj-card__links">
+              <ProjectVisual type={p.visual} />
+              <span className="preview-arrow">↗</span>
+              <span className="preview-label">ILLUSTRATIVE PREVIEW</span>
+            </button>
+            <div className="project-meta">
+              <span>{p.label}</span>
+              <span>2026</span>
+            </div>
+            <h3>{p.title}</h3>
+            <p className="project-tagline">{p.tagline}</p>
+            <p className="project-description">{p.description}</p>
+            <div className="project-tags">
+              {p.tech.slice(0, 3).map((t) => (
+                <span key={t}>{t}</span>
+              ))}
+            </div>
+            <button
+              className="case-link"
+              onClick={(e) => {
+                trigger.current = e.currentTarget;
+                setSelected(p);
+              }}
+            >
+              Inside the project <span className="sr-only">{p.title}</span>
+              <span aria-hidden="true">↗</span>
+            </button>
+          </article>
+        ))}
+      </div>
+      <div className="work-bottom">
+        <span>A closer look at how I think, build, and solve.</span>
+        <a
+          className="text-link"
+          href="https://github.com/elishaoigara"
+          target="_blank"
+          rel="noreferrer"
+        >
+          More on GitHub ↗
+        </a>
+      </div>
+      {selected && (
+        <dialog
+          ref={dialog}
+          className="case-dialog"
+          aria-labelledby="case-title"
+          onCancel={close}
+          onClose={() => setSelected(null)}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) close();
+          }}
+        >
+          <div className="case-content">
+            <div className="case-top">
+              <span className="eyebrow">PROJECT NOTES / {selected.label}</span>
+              <button
+                className="close-dialog"
+                onClick={close}
+                aria-label="Close case study"
+                autoFocus
+              >
+                ✕
+              </button>
+            </div>
+            <h2 id="case-title">{selected.title}</h2>
+            <p className="case-lede">{selected.tagline}</p>
+            <span className="case-status">{selected.status}</span>
+            <div className="case-section">
+              <h3>The challenge</h3>
+              <p>{selected.problem}</p>
+            </div>
+            <div className="case-section">
+              <h3>What I built</h3>
+              <p>{selected.implementation}</p>
+            </div>
+            <div className="case-section">
+              <h3>What this demonstrates</h3>
+              <p>{selected.value}</p>
+            </div>
+            <div className="project-tags">
+              {selected.tech.map((t) => (
+                <span key={t}>{t}</span>
+              ))}
+            </div>
+            <p className="scope-note">{selected.scope}</p>
+            <div className="case-actions">
+              {selected.live && (
                 <a
-                  href={p.code}
+                  className="btn btn-primary"
+                  href={selected.live}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn btn--ghost"
                 >
-                  View code ↗
+                  Visit website ↗
                 </a>
-                {p.live && (
-                  <a
-                    href={p.live}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn btn--primary"
-                  >
-                    Live demo ↗
-                  </a>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <style>{`
-        .proj-filters {
-          display: flex;
-          gap: 10px;
-          flex-wrap: wrap;
-          margin-bottom: 44px;
-        }
-        .proj-filter {
-          font-family: var(--font-mono);
-          font-size: 13px;
-          padding: 8px 16px;
-          border-radius: 20px;
-          border: 1px solid var(--border);
-          background: transparent;
-          color: var(--muted);
-          cursor: pointer;
-          transition: all .18s ease;
-        }
-        .proj-filter:hover { border-color: var(--ink); color: var(--ink); }
-        .proj-filter.is-active {
-          background: var(--ink);
-          border-color: var(--ink);
-          color: var(--cream);
-        }
-
-        .proj-list {
-          display: flex;
-          flex-direction: column;
-          gap: 28px;
-        }
-
-        .proj-card {
-          border: 1px solid var(--border);
-          border-radius: 4px;
-          padding: 36px 40px;
-          background: var(--paper);
-          transition: border-color .2s ease, transform .2s ease;
-        }
-        .proj-card:hover { border-color: var(--terracotta); }
-
-        .proj-card__head {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          gap: 16px;
-          margin-bottom: 18px;
-        }
-        .proj-card__title {
-          font-size: 26px;
-          margin-bottom: 4px;
-        }
-        .proj-card__tagline {
-          color: var(--muted);
-          font-size: 15px;
-          margin: 0;
-        }
-        .proj-card__year {
-          font-family: var(--font-mono);
-          font-size: 13px;
-          color: var(--muted);
-          flex-shrink: 0;
-          padding-top: 4px;
-        }
-
-        .proj-card__problem {
-          font-size: 16px;
-          margin: 0 0 14px;
-        }
-        .proj-card__desc {
-          color: var(--ink);
-          font-size: 16px;
-          line-height: 1.7;
-          margin: 0 0 14px;
-          max-width: 640px;
-        }
-        .proj-card__outcome {
-          font-size: 15px;
-          color: var(--muted);
-          margin: 0 0 22px;
-        }
-        .proj-card__outcome strong { color: var(--ink); }
-
-        .proj-card__tech {
-          display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-          margin-bottom: 24px;
-        }
-
-        .proj-card__links {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
-        }
-
-        @media (max-width: 640px) {
-          .proj-card { padding: 26px 22px; }
-        }
-      `}</style>
+              )}
+              {selected.code && (
+                <a
+                  className="btn btn-primary"
+                  href={selected.code}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Explore the source ↗
+                </a>
+              )}
+              <a className="btn btn-outline" href="#contact" onClick={close}>
+                Discuss a similar project ↗
+              </a>
+            </div>
+          </div>
+        </dialog>
+      )}
     </section>
   );
 }
