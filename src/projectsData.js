@@ -89,20 +89,20 @@ const projects = [
   {
     id: "callcare",
     title: "CallCare BPO",
-    label: "Business & recruitment",
+    label: "Website, SEO & ongoing support",
     category: "Business platforms",
-    tagline: "A business presence with a practical hiring workflow.",
+    tagline: "From website setup to SEO and ongoing care.",
     description:
-      "A BPO company website paired with job applications and recruitment tools, connecting a public-facing brand with day-to-day operations.",
+      "Purchased and configured the company’s website, carried out SEO, and continue to maintain it, alongside business pages and a practical recruitment workflow.",
     problem:
-      "A recruitment website has to do more than describe vacancies: it needs a usable application journey and a reliable way to review submissions.",
+      "CallCare needed a professional website that helps people find the business, supports job applications, and stays useful and up to date after launch.",
     implementation:
-      "Built business pages and recruitment flows with application submission, CV file validation, and recruiter access. The repository includes tests around submission and recruitment workflows.",
+      "Handled the website purchase, setup, and configuration, and carried out SEO for the company. Built business pages and recruitment flows with application submission, CV validation, and recruiter access. I continue to maintain the website and resolve issues as they arise.",
     value:
-      "Demonstrates business website delivery, form design, file handling, and attention to the operational details behind a public interface.",
+      "Demonstrates end-to-end website delivery, SEO, recruitment workflow development, and ongoing technical support for a business.",
     scope:
-      "Client website and recruitment workflow. Applicant information is never included in this portfolio.",
-    tech: ["React", "TypeScript", "Forms", "Access control"],
+      "Client website with ongoing maintenance. Work includes website purchase and configuration, SEO, and recruitment features. Applicant information is never included in this portfolio.",
+    tech: ["React", "SEO", "Website configuration", "Ongoing maintenance"],
     code: "https://github.com/elishaoigara/callcare-bpo-website",
     live: "https://callcare-bpo-website.vercel.app",
     status: "Public source",
